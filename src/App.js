@@ -1,13 +1,15 @@
 import React, { Component } from "react"
 import Header from './Header'
-import PageContent from './PageContent'
+import PostsPage from './PostsPage'
 import * as FeedsAPI from "./FeedsAPI"
+import { Switch, Route } from 'react-router-dom'
 import "./App.css"
 
 class App extends Component {
   state = {
     loaded: false,
     categories: [],
+    currentCategory: null,
     posts: []
   }
 
@@ -25,10 +27,22 @@ class App extends Component {
   render() {
     let posts = this.state.posts
 
+    const setCategory = (category) => {
+      this.setState({ currentCategory: category })
+    }
+
     return (
       <div className="App">
-        <Header categories={this.state.categories} />
-        <PageContent posts={this.state.posts} />
+        <Header categories={this.state.categories} setCategory={setCategory}/>
+        <Route exact 
+          path='/' 
+          component={() => 
+            <PostsPage 
+              posts={this.state.posts} 
+              category={this.state.currentCategory}
+            />
+        }/>
+        
         <button className="add-post-button">
           Add Post
         </button>
