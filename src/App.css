@@ -7,7 +7,7 @@
   height: 80px;
 }
 
-.App-header {
+.header {
   background-color: #222;
   height: 20%;
   color: white;
@@ -111,6 +111,20 @@ span {
 .post-info > p {
   margin: 0;
   padding: 0 5px 0 5px;
+}
+
+/* Add Post Button */
+
+.add-post-button {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  background-color: lightgray;
+  font-weight: bold;
+  font-size: 1em;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  box-shadow: 3px 4px darkslategrey;
 }
 
 
