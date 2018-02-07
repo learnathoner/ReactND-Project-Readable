@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     loaded: false,
     categories: '',
-    currentCategory: null,
+    currentCategory: '',
     posts: []
   }
 
@@ -33,7 +33,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header categories={this.state.categories} setCategory={setCategory}/>
+        <Header 
+          categories={this.state.categories} 
+          setCategory={setCategory}
+          currentCategory={this.state.currentCategory}
+        />
         <Route exact 
           path='/' 
           component={() => 

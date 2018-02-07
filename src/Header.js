@@ -1,41 +1,15 @@
 import React from 'react'
-import logo from "./logo.svg"
+import CategoriesBar from './CategoriesBar'
+import HeaderTitle from './HeaderTitle'
 
-
-const Header = ({ categories, setCategory }) => (
+const Header = ({ categories, currentCategory, setCategory }) => (
   <div className="header">
-    <div className="title-container">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Readable</h1>
-    </div>
-    <div className="header-categories">
-      <p className="categories-text">Categories:</p>
-      <ul className="categories-list">
-
-        {categories &&
-          categories.map(category => (
-            <li className="category-item" key={category.name}>
-              <a hfref='#'
-                onClick={e => {
-                  e.preventDefault();
-
-                  if (category.name !== 'All') {
-                    setCategory(category.name)
-                  } else {
-                    setCategory('')
-                  }
-                  
-                }}
-                style={{
-                  color: 'blue'
-                }}
-              >
-                {category.name}
-              </a>
-            </li>
-          ))}
-      </ul>
-    </div>
+    <HeaderTitle />
+    <CategoriesBar 
+      categories={categories}
+      currentCategory={currentCategory}
+      setCategory = {setCategory}
+    />
   </div>
 )
 
