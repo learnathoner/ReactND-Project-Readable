@@ -9,9 +9,12 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 20%;
   color: white;
+}
+
+.title-container {
+  display: flex;
 }
 
 .App-title {
@@ -21,6 +24,95 @@
 .App-intro {
   font-size: large;
 }
+
+/* Category List Styling */
+
+.header-categories {
+  display: flex;
+  padding: 10px;
+  background-color: darkgray;
+}
+
+.categories-text {
+  padding: 0;
+  margin: 0;
+  color: black;
+  font-weight: bold;
+}
+
+.categories-list {
+  list-style: none;
+  margin: 0;
+}
+
+.category-item {
+  display: inline;
+  padding: 10px;
+}
+
+/* Posts */
+
+.posts {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.post, .post-content {
+  outline: 1px solid #000;
+  box-sizing: border-box;
+}
+
+.post {
+  padding-left: 5px;
+  margin-bottom: 7.5px;
+}
+
+span {
+  font-weight: bold;
+  /* border: 1px solid black; */
+}
+
+.post-container {
+  display: flex;
+  align-items: center;
+}
+
+.post-rank {
+  width: 5%;
+}
+
+.post-vote {
+  width: 15%;
+}
+
+.post-content {
+  width: 85%;
+}
+
+.post-content > .post-title {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.post-content > .post-body {
+  margin: 0;
+  padding: 0 0 5px 0;
+}
+
+.post-info {
+  display: flex;
+  justify-content: center;
+  font-size: small;
+  padding: 3px 0;
+  border-top: 1px dashed darkgray;
+}
+
+.post-info > p {
+  margin: 0;
+  padding: 0 5px 0 5px;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
