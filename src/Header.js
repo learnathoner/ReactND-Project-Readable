@@ -11,19 +11,6 @@ const Header = ({ categories, setCategory }) => (
     <div className="header-categories">
       <p className="categories-text">Categories:</p>
       <ul className="categories-list">
-        <li className="category-item" key='All'>
-          <a hfref='#'
-            onClick={e => {
-              e.preventDefault();
-              setCategory(null)
-            }}
-            style={{
-              color: 'blue'
-            }}
-          >
-            All
-          </a>
-        </li>
 
         {categories &&
           categories.map(category => (
@@ -31,7 +18,13 @@ const Header = ({ categories, setCategory }) => (
               <a hfref='#'
                 onClick={e => {
                   e.preventDefault();
-                  setCategory(category.name)
+
+                  if (category.name !== 'All') {
+                    setCategory(category.name)
+                  } else {
+                    setCategory('')
+                  }
+                  
                 }}
                 style={{
                   color: 'blue'

@@ -8,7 +8,7 @@ import "./App.css"
 class App extends Component {
   state = {
     loaded: false,
-    categories: [],
+    categories: '',
     currentCategory: null,
     posts: []
   }
