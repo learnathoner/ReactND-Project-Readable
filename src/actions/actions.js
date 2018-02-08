@@ -38,7 +38,9 @@ export function receivePosts(category, posts) {
   }
 }
 
-// THUNK ACTION
+// THUNK ACTION 
+// Fetches posts from API, changes state while requesting, changes again when found
+// TODO: Add error handling
 
 export function fetchPosts(category) {
   return function(dispatch) {
@@ -57,5 +59,29 @@ export function fetchPosts(category) {
         dispatch(receivePosts(category, posts))
       )
 
+  }
+}
+
+// Tells below function whether it needs to fetch posts
+
+export function shouldFetchPosts(state, category) {
+  const posts = state.postsByCategory[category]
+
+  if (!posts) {
+    return true
+  } else if (posts.isFetching) {
+    return false
+  } else {
+    return posts.didInvalidate
+  }
+}
+
+export function fetchPostsIfNeeded(category) {
+  return (dispatch, getState) => {
+    if (shouldFetchPosts(getState(), category)) {
+      return dispatch(fetchPosts(category))
+    } else {
+      return Promise.resolve()
+    }
   }
 }
