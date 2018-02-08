@@ -1,14 +1,24 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Post = ({ post }) => (
   <div className="post-container">
-    <span className="post-rank">Rank</span>
+    <div className="post-rank">
+      <span>Rank</span>  
+    </div>
     <div className="post-vote">
       <span>Vote:</span> {post.voteScore}
     </div>
     <div className="post-content">
       <p className="post-title">
-        <span>{post.title}</span>
+        <Link 
+          to={`/post/${post.id}`}
+          style={{
+            textDecoration: 'none'
+          }}
+        >
+          {post.title}
+        </Link>
       </p>
       <p className="post-body">{post.body}</p>
       <div className="post-info">

@@ -58,8 +58,8 @@
   padding: 10px;
 }
 
-.post, .post-content {
-  outline: 1px solid #000;
+.post {
+  border: 1px solid #000;
   box-sizing: border-box;
 }
 
@@ -88,6 +88,7 @@ span {
 
 .post-content {
   width: 85%;
+  outline: 1px solid;
 }
 
 .post-content > .post-title {
@@ -124,7 +125,7 @@ span {
   font-size: 1em;
   border: 1px solid darkgray;
   border-radius: 5px;
-  box-shadow: 3px 4px darkslategrey;
+  box-shadow: 3px 4px darkg;
 }
 
 
