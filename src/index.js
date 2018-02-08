@@ -3,12 +3,26 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter }  from 'react-router-dom'
 import './index.css';
 import App from './App';
-import { createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { selectedCategory } from './reducers/reducers'
+import rootReducer from './reducers/reducers'
 import registerServiceWorker from './registerServiceWorker';
+import { selectCategory, fetchPosts } from './actions/actions';
 
-const store = createStore(selectedCategory)
+const loggerMiddleware = createLogger()
+const store = createStore(
+  rootReducer,
+applyMiddleware(
+  thunkMiddleware,
+  loggerMiddleware
+))
+
+store.dispatch(selectCategory('All'))
+store
+  .dispatch(fetchPosts('All'))
+  .then(() => console.log(store.getState()))
 
 ReactDOM.render(
   <Provider store={store}>
