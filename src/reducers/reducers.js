@@ -66,6 +66,22 @@ export function postsByCategory(state={}, action) {
   }
 }
 
+export function postsByID(state={}, action) {
+  switch (action.type) {
+    case RECEIVE_POSTS:
+      const newState = { ...state }
+      
+      action.posts.forEach(post => {
+        if (!newState[post.id]) { newState[post.id] = post }
+      })
+
+      return newState;
+
+    default:
+      return state
+  }
+}
+
 function uniqueArr(state, categories) {
   const mergedArr = [...state]
 
@@ -90,7 +106,8 @@ export function categories(state=[], action) {
 const rootReducer = combineReducers({
   postsByCategory,
   selectedCategory,
-  categories
+  categories,
+  postsByID
 })
 
 export default rootReducer

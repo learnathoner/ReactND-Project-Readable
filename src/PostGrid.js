@@ -11,7 +11,9 @@ class PostGrid extends Component {
           {/* id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted */}
           {posts &&
             posts.map(post => (
-              <Post key={post.id} post={post} />
+              <li className="post" key={post.id}>
+                <Post post={post} />
+              </li>
             ))}
         </ul>
       </div>

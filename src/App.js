@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Header from './Header'
-import PostsPage from './PostsPage'
+import PageContent from './PageContent'
+import PostPage from './PostPage'
 import * as FeedsAPI from "./FeedsAPI"
 import { Switch, Route } from 'react-router-dom'
 import "./App.css"
@@ -39,14 +40,25 @@ class App extends Component {
           setCategory={setCategory}
           currentCategory={this.state.currentCategory}
         />
-        <Route 
-          path='/' 
-          component={() => 
-            <PostsPage 
-              posts={this.state.posts} 
-              category={this.state.currentCategory}
-            />
-        }/>
+       
+       {/* TODO: Why doesn't switch work? */}
+       <Switch>
+          <Route 
+            exact
+            path='/' 
+            component={PageContent}
+          />
+          <Route 
+            exact
+            path='/r/:category' 
+            component={PageContent}
+          />
+          <Route
+            path='/post/:id'
+            component={PostPage}
+          />
+        </ Switch>
+      
         
         <button className="add-post-button">
           Add Post
