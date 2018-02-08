@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Category from './Category'
-import { selectCategory } from './actions/actions'
+import { selectCategory, fetchPostsIfNeeded } from './actions/actions'
 import { connect } from 'react-redux'
 
 class CategoriesBar extends Component {
@@ -39,6 +39,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onCategoryClick: (category) => {
+      dispatch(fetchPostsIfNeeded(category))
       dispatch(selectCategory(category))
 
     }

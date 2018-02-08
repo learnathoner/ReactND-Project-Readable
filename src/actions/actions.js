@@ -1,6 +1,6 @@
 import { getPosts, getCats, getCatPosts } from '../FeedsAPI'
 
-export const SELECT_CATEGORY = 'SElECT_CATEGORY'
+export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
 export function selectCategory(category) {
   return {

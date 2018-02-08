@@ -1,24 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Post from './Post'
+import { connect } from 'react-redux'
 
-const PostGrid = ({ posts, category }) => {
-  let visiblePosts = [...posts];
+class PostGrid extends Component {
+  render() {
+    const { posts } = this.props
 
-  if (category) {
-    visiblePosts = posts.filter(post => post.category === category);
+    return (<div className="posts-container">
+        <ul className="posts">
+          {/* id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted */}
+          {posts &&
+            posts.map(post => (
+              <Post key={post.id} post={post} />
+            ))}
+        </ul>
+      </div>
+    )
   }
 
-  return (<div className="posts-container">
-      <ul className="posts">
-        {/* id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted */}
-        {visiblePosts.length > 0 &&
-          visiblePosts.map(post => (
-            <Post key={post.id} post={post} />
-          ))}
-      </ul>
-    </div>
-)
+} 
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    posts: state.postsByCategory[state.selectedCategory].items
+  }
 }
 
-export default PostGrid
+export default connect(mapStateToProps)(PostGrid)

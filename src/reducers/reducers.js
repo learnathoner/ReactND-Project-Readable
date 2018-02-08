@@ -12,7 +12,7 @@ import {
 export function selectedCategory(state = '', action) {
   switch (action.type) {
     case SELECT_CATEGORY:
-      return action.category === 'All' ? '' : action.category;
+      return action.category;
     default:
       return state;
   }

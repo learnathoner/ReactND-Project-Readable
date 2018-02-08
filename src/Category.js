@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 const Category = ({ category, currentCategory, onCategoryClick, store }) => {
 
-  if (category.path === currentCategory) {
+  if (category.name === currentCategory) {
     return (
       <li className="category-item">
         <span>{category.name}</span>      
@@ -16,7 +16,7 @@ const Category = ({ category, currentCategory, onCategoryClick, store }) => {
       <a hfref='#'
         onClick={e => {
           e.preventDefault();
-          onCategoryClick(category.path);
+          onCategoryClick(category.name);
         }}
         style={{
           color: 'blue'
