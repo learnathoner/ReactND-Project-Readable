@@ -30,7 +30,6 @@ class CategoriesBar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return {
     currentCategory: state
   }
@@ -39,7 +38,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onCategoryClick: (category) => {
-      console.log('dispatched');
       dispatch(selectCategory(category))
 
     }

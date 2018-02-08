@@ -21,6 +21,7 @@ class App extends Component {
 
     FeedsAPI.getPosts().then(posts => {
       this.setState({ posts: posts })
+      console.log(posts);
     })
   }
 
