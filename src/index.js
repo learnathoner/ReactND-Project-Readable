@@ -9,7 +9,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers/reducers'
 import registerServiceWorker from './registerServiceWorker';
-import { selectCategory, fetchPostsIfNeeded } from './actions/actions';
+import { selectCategory, fetchCategories, fetchPostsIfNeeded } from './actions/actions';
 
 const loggerMiddleware = createLogger()
 const store = createStore(
@@ -20,6 +20,7 @@ applyMiddleware(
 ))
 
 store.dispatch(selectCategory('All'))
+store.dispatch(fetchCategories());
 store
   .dispatch(fetchPostsIfNeeded('All'))
   .then(() => console.log(store.getState()))

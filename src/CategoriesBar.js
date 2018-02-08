@@ -31,7 +31,8 @@ class CategoriesBar extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentCategory: state
+    currentCategory: state.selectedCategory,
+    categories: state.categories
   }
 }
 

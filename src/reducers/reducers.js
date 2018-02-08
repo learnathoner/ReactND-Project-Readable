@@ -5,7 +5,8 @@ import {
   RECEIVE_POSTS,
   INVALIDATE_SUBREDDIT,
   FETCH_POSTS,
-  INVALIDATE_CATEGORY
+  INVALIDATE_CATEGORY,
+  RECEIVE_CATEGORIES
 } from '../actions/actions'
 
 export function selectedCategory(state = '', action) {
@@ -65,9 +66,31 @@ export function postsByCategory(state={}, action) {
   }
 }
 
+function uniqueArr(state, categories) {
+  const mergedArr = [...state]
+
+  for (let category of categories) {
+    if (!mergedArr.includes(category)) {
+      mergedArr.push(category);
+    }
+  }
+
+  return mergedArr;
+}
+
+export function categories(state=[], action) {
+  switch (action.type) {
+    case RECEIVE_CATEGORIES:
+      return uniqueArr(state, action.categories)
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   postsByCategory,
-  selectedCategory
+  selectedCategory,
+  categories
 })
 
 export default rootReducer

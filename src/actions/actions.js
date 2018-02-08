@@ -1,4 +1,4 @@
-import { getPosts, getCatPosts } from '../FeedsAPI'
+import { getPosts, getCats, getCatPosts } from '../FeedsAPI'
 
 export const SELECT_CATEGORY = 'SElECT_CATEGORY'
 
@@ -35,6 +35,15 @@ export function receivePosts(category, posts) {
     category,
     posts: posts,
     receivedAt: Date.now()
+  }
+}
+
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+
+export function receiveCategories(categories) {
+  return {
+    type: RECEIVE_CATEGORIES,
+    categories
   }
 }
 
@@ -83,5 +92,18 @@ export function fetchPostsIfNeeded(category) {
     } else {
       return Promise.resolve()
     }
+  }
+}
+
+// Fetch Categories
+
+export function fetchCategories() {
+  return function(dispatch) {
+
+    return getCats()
+      .then(categories =>
+        dispatch(receiveCategories(categories))
+      )
+
   }
 }
