@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 
 const Category = ({ category, currentCategory, onCategoryClick, store }) => {
@@ -11,19 +12,21 @@ const Category = ({ category, currentCategory, onCategoryClick, store }) => {
     )
   }
 
+  const slug = `/${category.path}`
+
   return (
     <li className="category-item">
-      <a hfref='#'
+      <Link 
+        to={slug}
         onClick={e => {
-          e.preventDefault();
           onCategoryClick(category.name);
         }}
         style={{
-          color: 'blue'
+          textDecoration: 'none'
         }}
       >
         {category.name}
-      </a>
+      </ Link>
     </li>
   )
 }

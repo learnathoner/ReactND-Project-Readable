@@ -39,7 +39,7 @@ class App extends Component {
           setCategory={setCategory}
           currentCategory={this.state.currentCategory}
         />
-        <Route exact 
+        <Route 
           path='/' 
           component={() => 
             <PostsPage 
