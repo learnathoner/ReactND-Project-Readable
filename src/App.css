@@ -55,17 +55,14 @@
 .posts {
   list-style: none;
   margin: 0;
-  padding: 10px;
+  padding: 0;
 }
 
 .post {
   border: 1px solid #000;
   box-sizing: border-box;
-}
-
-.post {
   padding-left: 5px;
-  margin-bottom: 7.5px;
+  margin: 7.5px 0;
 }
 
 span {
@@ -112,6 +109,20 @@ span {
 .post-info > p {
   margin: 0;
   padding: 0 5px 0 5px;
+}
+
+/* Comments */
+
+.comment-input {
+  text-align: left;
+  padding-left: 40px;
+}
+
+#comment-box {
+  text-align: center;
+  width: 60%;
+  height: 150px;
+  border: 1px solid;
 }
 
 /* Add Post Button */

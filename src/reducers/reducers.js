@@ -6,7 +6,8 @@ import {
   INVALIDATE_SUBREDDIT,
   FETCH_POSTS,
   INVALIDATE_CATEGORY,
-  RECEIVE_CATEGORIES
+  RECEIVE_CATEGORIES,
+  RECEIVE_COMMENTS
 } from '../actions/actions'
 
 export function selectedCategory(state = '', action) {
@@ -103,11 +104,24 @@ export function categories(state=[], action) {
   }
 }
 
+export function commentsByID(state={}, action) {
+  switch (action.type) {
+    case RECEIVE_COMMENTS:
+      return {
+        ...state,
+        [action.id]: action.comments
+      }
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   postsByCategory,
   selectedCategory,
   categories,
-  postsByID
+  postsByID,
+  commentsByID
 })
 
 export default rootReducer

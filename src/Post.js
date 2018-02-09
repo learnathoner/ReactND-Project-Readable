@@ -28,6 +28,9 @@ const Post = ({ post }) => (
         <p className="post-category">
           <span>Posted in:</span> {post.category}
         </p>
+        <p className="post-comment-count">
+          <span>Comments:</span> {post.commentCount}
+        </p>
       </div>
     </div>
   </div>

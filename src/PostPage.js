@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectCategory } from './actions/actions'
+import { selectCategory, fetchComments } from './actions/actions'
 import Post from './Post'
 
 class PostPage extends Component {
-  render () {
-    const { postByID, clearCategory } = this.props;
+  componentDidMount() {
+    this.props.clearCategory();
+    this.props.getComments(this.props.match.params.id);
+  }
 
-    clearCategory();
+  render () {
+    const { postByID, clearCategory, commentsByID } = this.props;
 
     if (!postByID) {
       return (
@@ -22,11 +25,13 @@ class PostPage extends Component {
         </div>
 
         <div className="comment-input">
-          <input type="text" name="comment" id="commentBox" />
+          <textarea name="comment" id="comment-box" placeholder="Leave Comments Here" />
         </div>
 
         <div className="comments">
-          Comments here
+          {commentsByID && commentsByID.map((comment) => (
+            <div>Comment: {comment.body}</div>
+          ))}
         </div>
       </div>
 
@@ -36,13 +41,15 @@ class PostPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    postByID: state.postsByID[ownProps.match.params.id]
+    postByID: state.postsByID[ownProps.match.params.id],
+    commentsByID: state.commentsByID[ownProps.match.params.id]
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    clearCategory: () => { dispatch(selectCategory('')) }
+    clearCategory: () => { dispatch(selectCategory('')) },
+    getComments: (id) => { dispatch(fetchComments(id)) }
   }
 }
 

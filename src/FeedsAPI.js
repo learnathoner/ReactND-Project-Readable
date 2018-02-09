@@ -45,6 +45,13 @@ export const addPost = ({ id, timeStamp, title, body, author, category }) =>
     })
   }).then(res => res.json())
 
+// Returns comments by ID
+export const getComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
+    .then(comments => comments)
+
+
 // Get posts/:id - single post
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"
 // Put /posts:id - Edit details of posts, takes title and body
