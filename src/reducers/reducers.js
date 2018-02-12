@@ -44,7 +44,8 @@ function posts(
         ...state,
         isFetching: false,
         didInvalidate: false,
-        items: action.posts,
+        // postsByCategory only stores postID
+        items: action.posts.map(post => post.id),
         lastUpdated: action.receivedAt
       }
     default:
