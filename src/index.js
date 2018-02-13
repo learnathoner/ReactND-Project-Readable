@@ -23,7 +23,6 @@ store.dispatch(selectCategory('All'))
 store.dispatch(fetchCategories());
 store
   .dispatch(fetchPostsIfNeeded('All'))
-  .then(() => console.log(store.getState()))
 
 ReactDOM.render(
   <Provider store={store}>

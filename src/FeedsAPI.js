@@ -1,12 +1,12 @@
 // Delete posts: id: 213, 2134, 21345
-const testPost = {
-  id: 2134,
-  timeStamp: 1233543534,
-  body: 'testing posts',
-  title: 'test',
-  author: 'me',
-  category: 'react'
-}
+// const testPost = {
+//   id: 2134,
+//   timeStamp: 1233543534,
+//   body: 'testing posts',
+//   title: 'test',
+//   author: 'me',
+//   category: 'react'
+// }
 
 const headers = { 
  'Authorization': 'Guest' 

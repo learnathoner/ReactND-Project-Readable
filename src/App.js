@@ -22,12 +22,10 @@ class App extends Component {
 
     FeedsAPI.getPosts().then(posts => {
       this.setState({ posts: posts })
-      console.log(posts);
     })
   }
 
   render() {
-    let posts = this.state.posts
 
     const setCategory = (category) => {
       this.setState({ currentCategory: category })

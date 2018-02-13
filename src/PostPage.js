@@ -4,6 +4,7 @@ import { selectCategory, fetchComments } from './actions/actions'
 import Post from './Post'
 
 class PostPage extends Component {
+
   componentDidMount() {
     this.props.clearCategory();
     this.props.getComments(this.props.match.params.id);
@@ -20,6 +21,10 @@ class PostPage extends Component {
 
     return (
       <div>
+        <div className="post-page-title">
+          <h3>Now Viewing Post:</h3>
+        </div>
+
         <div className="post">
           <Post post={postByID} />
         </div>
@@ -30,7 +35,7 @@ class PostPage extends Component {
 
         <div className="comments">
           {commentsByID && commentsByID.map((comment) => (
-            <div>Comment: {comment.body}</div>
+            <div key={comment.id}>Comment: {comment.body}</div>
           ))}
         </div>
       </div>

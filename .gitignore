@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/reactnd-readable-server/api-server/node_modules
 
 # testing
 /coverage
