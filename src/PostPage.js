@@ -47,7 +47,7 @@ class PostPage extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     postByID: state.postsByID[ownProps.match.params.id],
-    commentsByID: state.commentsByID[ownProps.match.params.id]
+    commentsByID: state.commentsByPost[ownProps.match.params.id]
   }
 }
 

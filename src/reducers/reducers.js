@@ -105,7 +105,7 @@ export function categories(state=[], action) {
   }
 }
 
-export function commentsByID(state={}, action) {
+export function commentsByPost(state={}, action) {
   switch (action.type) {
     case RECEIVE_COMMENTS:
       return {
@@ -122,7 +122,7 @@ const rootReducer = combineReducers({
   selectedCategory,
   categories,
   postsByID,
-  commentsByID
+  commentsByPost
 })
 
 export default rootReducer
