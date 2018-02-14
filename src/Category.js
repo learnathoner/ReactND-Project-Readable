@@ -12,7 +12,7 @@ const Category = ({ category, currentCategory, onCategoryClick, store }) => {
     )
   }
 
-  const slug = category.name === 'All' ? '/' : `/r/${category.path}`
+  const slug = category.name === 'all' ? '/' : `/r/${category.path}`
 
   return (
     <li className="category-item">

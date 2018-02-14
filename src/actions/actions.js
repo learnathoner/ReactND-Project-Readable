@@ -66,7 +66,7 @@ export function fetchPosts(category) {
     
     dispatch(requestPosts(category))
 
-    if (category === 'All') {
+    if (category === 'all') {
       return getPosts(category)
       .then(posts =>
         dispatch(receivePosts(category, posts))

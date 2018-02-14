@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
 import Post from './Post'
 import { connect } from 'react-redux'
-import { selectCategory } from './actions/actions'
+import { selectCategory, fetchPostsIfNeeded } from './actions/actions'
 
 class PostGrid extends Component {
 
-  componentWillMount() {
-    const { selectedCategory, category = 'All', changeCategory } = this.props;
+  // componentWillMount() {
+  //   const { selectedCategory, 
+  //     category = 'all', 
+  //     changeCategory,
+  //     fetchPostsIfNeeded } = this.props;
 
-    if (selectedCategory !== category) {
-      changeCategory(category);
-    }
-  }
+  //   if (selectedCategory !== category) {
+  //     changeCategory(category);
+  //     fetchPostsIfNeeded(category);
+  //   }
+  // }
 
   render() {
     const { posts } = this.props
+    const { selectedCategory, 
+      category = 'all', 
+      changeCategory,
+      fetchPostsIfNeeded } = this.props;
+
+    if (selectedCategory !== category) {
+      changeCategory(category);
+      fetchPostsIfNeeded(category);
+    }
 
     return (<div className="posts-container">
         <ul className="posts">
@@ -45,7 +58,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCategory: (category) => { dispatch(selectCategory(category)) }
+    changeCategory: (category) => { dispatch(selectCategory(category)) },
+    fetchPostsIfNeeded: (category) => dispatch(fetchPostsIfNeeded(category))
   }
 }
 

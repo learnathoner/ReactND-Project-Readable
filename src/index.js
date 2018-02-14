@@ -21,10 +21,10 @@ const store = createStore(
     )
 ))
 
-store.dispatch(selectCategory('All'))
+store.dispatch(selectCategory('all'))
 store.dispatch(fetchCategories());
 store
-  .dispatch(fetchPostsIfNeeded('All'))
+  .dispatch(fetchPostsIfNeeded('all'))
 
 ReactDOM.render(
   <Provider store={store}>
