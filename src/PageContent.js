@@ -11,7 +11,7 @@ class PageContent extends Component {
           <p className="posts-bar-text">Sort By: </p>
         </div>
 
-        <PostGrid category={this.props.match.params.category}/>
+        <PostGrid />
 
       </div>
     )

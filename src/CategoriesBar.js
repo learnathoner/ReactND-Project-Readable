@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 class CategoriesBar extends Component {
 
   render() {
-    const { categories, currentCategory, setCategory } = this.props;
+    const { categories, currentCategory } = this.props;
 
     return (
       <div className="header-categories">
@@ -17,12 +17,11 @@ class CategoriesBar extends Component {
           categories.map(category => (
             <Category 
               category={category}
-              setCategory={setCategory}
               currentCategory={currentCategory}
-              onCategoryClick={this.props.onCategoryClick}
               key={category.name}
             />        
           ))}
+
       </ul>
     </div>
     )
@@ -36,14 +35,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onCategoryClick: (category) => {
-      dispatch(fetchPostsIfNeeded(category))
-      dispatch(selectCategory(category))
-
-    }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(CategoriesBar)
+export default connect(mapStateToProps)(CategoriesBar)

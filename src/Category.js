@@ -1,34 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Category = ({ category, currentCategory, onCategoryClick, store }) => {
-
+  // If on currently selected category, return span instead of link
   if (category.name === currentCategory) {
     return (
       <li className="category-item">
-        <span>{category.name}</span>      
+        <span>{category.name}</span>
       </li>
-    )
+    );
   }
 
-  const slug = category.name === 'all' ? '/' : `/r/${category.path}`
+  // Make 'all' link to home, otherwise use category path
+  const slug = category.name === "all" ? "/" : `/r/${category.path}`;
 
+  // All category names link to their 'slug'
   return (
     <li className="category-item">
-      <Link 
+      <Link
         to={slug}
-        onClick={e => {
-          onCategoryClick(category.name);
-        }}
-        style={{
-          textDecoration: 'none'
-        }}
+        style={{ textDecoration: "none" }}
       >
         {category.name}
-      </ Link>
+      </Link>
     </li>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;

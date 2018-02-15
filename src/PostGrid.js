@@ -5,28 +5,16 @@ import { selectCategory, fetchPostsIfNeeded } from './actions/actions'
 
 class PostGrid extends Component {
 
-  // componentWillMount() {
-  //   const { selectedCategory, 
-  //     category = 'all', 
-  //     changeCategory,
-  //     fetchPostsIfNeeded } = this.props;
-
-  //   if (selectedCategory !== category) {
-  //     changeCategory(category);
-  //     fetchPostsIfNeeded(category);
-  //   }
-  // }
-
   render() {
     const { posts } = this.props
+    const currentCategory = this.props.match.params.category || 'all';
     const { selectedCategory, 
-      category = 'all', 
       changeCategory,
       fetchPostsIfNeeded } = this.props;
 
-    if (selectedCategory !== category) {
-      changeCategory(category);
-      fetchPostsIfNeeded(category);
+    if (selectedCategory !== currentCategory) {
+      changeCategory(currentCategory);
+      fetchPostsIfNeeded(currentCategory);
     }
 
     return (<div className="posts-container">
@@ -47,7 +35,9 @@ class PostGrid extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   // Maps post IDs from state.postsByCategory to post in state.postsById
-  const postIDs = state.postsByCategory[state.selectedCategory].items;
+  const postIDs = state.postsByCategory[state.selectedCategory]
+    ? state.postsByCategory[state.selectedCategory].items
+    : [];
   const posts = postIDs && postIDs.map((id) => state.postsByID[id]);
 
   return {

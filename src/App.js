@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import PageContent from "./PageContent";
+import PostGrid from './PostGrid'
 import PostPage from "./PostPage";
 import * as FeedsAPI from "./FeedsAPI";
 import { Switch, Route } from "react-router-dom";
@@ -17,8 +18,8 @@ class App extends Component {
         <Header />
 
         <Switch>
-          <Route exact path="/" component={PageContent} />
-          <Route exact path="/r/:category" component={PageContent} />
+          <Route exact path="/" component={PostGrid} />
+          <Route exact path="/r/:category" component={PostGrid} />
           <Route path="/post/:id" component={PostPage} />
         </Switch>
 
