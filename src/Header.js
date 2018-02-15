@@ -2,7 +2,7 @@ import React from 'react'
 import CategoriesBar from './CategoriesBar'
 import HeaderTitle from './HeaderTitle'
 
-const Header = ({ categories, currentCategory, setCategory }) => (
+const Header = () => (
   <div className="header">
     <HeaderTitle />
     <CategoriesBar />
