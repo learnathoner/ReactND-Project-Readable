@@ -84,22 +84,17 @@ export function postsByID(state={}, action) {
   }
 }
 
-function uniqueArr(state, categories) {
-  const mergedArr = [...state]
-
-  for (let category of categories) {
-    if (!mergedArr.includes(category)) {
-      mergedArr.push(category);
-    }
-  }
-
-  return mergedArr;
-}
-
-export function categories(state=[], action) {
+export function categories(state={}, action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
-      return uniqueArr(state, action.categories)
+      return {
+        ...state,
+        byName: action.categories.reduce((categories, category) => {
+          categories[category.name] = category;
+          return categories;
+        }, {}),
+        allCategories: action.categories.map(category => category.name)
+      }
     default:
       return state;
   }

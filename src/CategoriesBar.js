@@ -31,7 +31,11 @@ class CategoriesBar extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     currentCategory: state.selectedCategory,
-    categories: state.categories
+    categories: state.categories.allCategories
+      // TODO: Why is state.categories.allCategories not detected initially?
+      ? state.categories.allCategories.map(categoryName => state.categories.byName[categoryName])
+      : ''
+
   }
 }
 
