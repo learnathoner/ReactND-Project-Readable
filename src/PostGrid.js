@@ -8,13 +8,21 @@ class PostGrid extends Component {
   render() {
     const { posts } = this.props
     const currentCategory = this.props.match.params.category || 'all';
-    const { selectedCategory, 
+    const { categories,
+      selectedCategory, 
       changeCategory,
       fetchPostsIfNeeded } = this.props;
 
+    // If URL is different than currently selected category
     if (selectedCategory !== currentCategory) {
+
+      // Change selectedCategory to current slug /r/:category
       changeCategory(currentCategory);
-      fetchPostsIfNeeded(currentCategory);
+
+      // If current slug is in categories, load posts for it
+      if (categories && selectedCategory in categories) {
+        fetchPostsIfNeeded(currentCategory);
+      }
     }
 
     return (<div className="posts-container">
@@ -30,7 +38,6 @@ class PostGrid extends Component {
       </div>
     )
   }
-
 } 
 
 const mapStateToProps = (state, ownProps) => {
@@ -39,8 +46,8 @@ const mapStateToProps = (state, ownProps) => {
     ? state.postsByCategory[state.selectedCategory].items
     : [];
   const posts = postIDs && postIDs.map((id) => state.postsByID[id]);
-
   return {
+    categories: state.categories.byName,
     selectedCategory: state.selectedCategory,
     posts: posts
   }
