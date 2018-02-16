@@ -139,6 +139,22 @@ span {
   box-shadow: 3px 4px darkg;
 }
 
+/* MODAL  */
+
+.modal {
+  height: 500px;
+  width: 500px;
+  border: 2px solid black;
+  position: fixed;
+  left: auto;
+  right: auto;
+  top: 200px;
+  background-color: #fff;
+}
+
+.add-post-input * {
+  padding: 5px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

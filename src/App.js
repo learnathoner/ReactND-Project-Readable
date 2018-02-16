@@ -4,6 +4,7 @@ import PageContent from "./PageContent";
 import PostGrid from './PostGrid'
 import PostPage from "./PostPage";
 import SortBar from './SortBar'
+import AddPost from './AddPost'
 import * as FeedsAPI from "./FeedsAPI";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
@@ -25,7 +26,9 @@ class App extends Component {
           <Route path="/post/:id" component={PostPage} />
         </Switch>
 
-        <button className="add-post-button">Add Post</button>
+        <AddPost />
+
+        {/* <button className="add-post-button">Add Post</button> */}
       </div>
     );
   }
