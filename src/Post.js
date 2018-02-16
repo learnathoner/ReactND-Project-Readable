@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 const Post = ({ post }) => (
   <div className="post-container">
@@ -30,6 +31,10 @@ const Post = ({ post }) => (
         </p>
         <p className="post-comment-count">
           <span>Comments:</span> {post.commentCount}
+        </p>
+        <p className="post-time-stamp">
+          <span>Posted On: </span> 
+          {moment.utc(post.timestamp).format('l')}
         </p>
       </div>
     </div>
