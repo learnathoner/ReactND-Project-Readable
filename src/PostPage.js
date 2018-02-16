@@ -1,13 +1,44 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectCategory, fetchComments } from './actions/actions'
+import { selectCategory, fetchComments, addCommentAction } from './actions/actions'
 import Post from './Post'
+import { addComment } from './FeedsAPI'
+import uuid from 'uuid'
 
 class PostPage extends Component {
 
   componentDidMount() {
     this.props.clearCategory();
     this.props.getComments(this.props.match.params.id);
+  }
+
+  submitComment = () => {
+    const id = uuid();
+    const parentId = this.props.postByID.id
+    const author = document.getElementById('comment-author').value
+    const body = document.getElementById('comment-box').value
+    const timestamp = Date.now()
+    const voteScore = 1;
+    
+    if (!author || !body) {
+      alert('Must have username and comment text')
+    } else {
+      const newComment = {
+        id,
+        parentId,
+        timestamp,
+        body,
+        author,
+        voteScore
+      }
+
+      addComment(newComment);
+      this.props.addNewComment(newComment);
+
+      document.getElementById('comment-author').value = ''
+      document.getElementById('comment-box').value = ''
+
+    }
   }
 
   render () {
@@ -30,7 +61,16 @@ class PostPage extends Component {
         </div>
 
         <div className="comment-input">
+          <div className="comment-username-input">
+            User: <input type="text" id="comment-author" placeholder="user name"/>
+          </div>
           <textarea name="comment" id="comment-box" placeholder="Leave Comments Here" />
+          <div className="comment-submit-button-container">
+            <button 
+              className="comment-submit-button"
+              onClick={this.submitComment}
+            >Submit</button>
+          </div>
         </div>
 
         <div className="comments">
@@ -54,7 +94,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clearCategory: () => { dispatch(selectCategory('')) },
-    getComments: (id) => { dispatch(fetchComments(id)) }
+    getComments: (id) => { dispatch(fetchComments(id)) },
+    addNewComment: (comment) => { dispatch(addCommentAction(comment)) }
   }
 }
 

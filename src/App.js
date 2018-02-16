@@ -23,7 +23,6 @@ class App extends Component {
 
         <AddPost />
 
-        {/* <button className="add-post-button">Add Post</button> */}
       </div>
     );
   }

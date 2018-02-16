@@ -8,7 +8,8 @@ import {
   INVALIDATE_CATEGORY,
   RECEIVE_CATEGORIES,
   RECEIVE_COMMENTS,
-  SET_SORT
+  SET_SORT,
+  ADD_COMMENT
 } from '../actions/actions'
 
 // SELECTED CATEGORY
@@ -116,6 +117,15 @@ export function categories(state={}, action) {
 // Receives all comments linked to a post ID
 export function commentsByPost(state={}, action) {
   switch (action.type) {
+    case ADD_COMMENT:
+      const { parentId } = action.comment
+      return {
+        ...state,
+        [parentId]: [
+          ...state[parentId],
+          action.comment
+        ]
+      }
     case RECEIVE_COMMENTS:
       return {
         ...state,

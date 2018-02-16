@@ -17,7 +17,6 @@ class SortBar extends Component {
 
   render() {
 
-
     return (
       <div className="sort-bar">
         <div className="sort-text">
@@ -25,21 +24,21 @@ class SortBar extends Component {
         </div>
         <div className="sort-date">
           Date 
-            <span onClick={() => this.testRegExp('sort-timestamp-ascending')}>
-              <FaArrowDown />  
-            </span>
-            <span onClick={() => this.testRegExp('sort-timestamp-descending')}>
-              <FaArrowUp />  
-            </span>
+            <div onClick={() => this.testRegExp('sort-timestamp-ascending')}>
+              Oldest 
+            </div>
+            <div onClick={() => this.testRegExp('sort-timestamp-descending')}>
+              Newest  
+            </div>
         </div>
         <div className="rating">
           Rating
-          <span onClick={() => this.testRegExp('sort-voteScore-descending')}>
-            <FaArrowDown />  
-          </span>
-          <span onClick={() => this.testRegExp('sort-voteScore-ascending')}>
-            <FaArrowUp />  
-          </span>
+          <div onClick={() => this.testRegExp('sort-voteScore-descending')}>
+            Highest 
+          </div>
+          <div onClick={() => this.testRegExp('sort-voteScore-ascending')}>
+            Lowest  
+          </div>
         </div>
         <div className="clear" onClick={() => this.props.setSort('')}>
           Clear Sort

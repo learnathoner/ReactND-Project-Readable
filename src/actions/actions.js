@@ -1,4 +1,4 @@
-import { getPosts, getCats, getCatPosts, getComments } from "../FeedsAPI";
+import { getPosts, getCats, getCatPosts, getComments, addComment } from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
 
@@ -121,6 +121,12 @@ export function fetchCategories() {
   };
 }
 
+/*
+*
+* COMMENTS
+*
+*/
+
 // Fetch Comments
 
 export function fetchComments(id) {
@@ -129,4 +135,16 @@ export function fetchComments(id) {
       dispatch(receiveComments(id, comments))
     );
   };
+}
+
+// Add comment
+
+export const ADD_COMMENT = 'ADD_COMMENT'
+
+export function addCommentAction(comment) {
+  return {
+    type: ADD_COMMENT,
+    comment
+  }
+
 }

@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
-import Modal from 'react-modal'
-import uuid from 'uuid'
-import { addPost } from './FeedsAPI'
-import { connect } from 'react-redux'
-import { invalidateCategory } from './actions/actions'
+import React, { Component } from "react";
+import Modal from "react-modal";
+import uuid from "uuid";
+import { addPost } from "./FeedsAPI";
+import { connect } from "react-redux";
+import { invalidateCategory } from "./actions/actions";
 
 class AddPost extends Component {
-
   state = {
     modalShowing: false
-  }
+  };
 
-  openModal = () => this.setState({ modalShowing: true })
+  openModal = () => this.setState({ modalShowing: true });
 
-  closeModal = () => this.setState({ modalShowing: false })
+  closeModal = () => this.setState({ modalShowing: false });
 
   submitPost = () => {
     const id = uuid();
-    const author = document.getElementById('input-username').value
-    const category = document.getElementById('input-category').value
-    const title = document.getElementById('input-title').value
-    const body = document.getElementById('input-body').value
-    const timestamp = Date.now()
+    const author = document.getElementById("input-username").value;
+    const category = document.getElementById("input-category").value;
+    const title = document.getElementById("input-title").value;
+    const body = document.getElementById("input-body").value;
+    const timestamp = Date.now();
 
     const { categories, invalidateCategories } = this.props;
 
@@ -32,68 +31,63 @@ class AddPost extends Component {
       title,
       body,
       timestamp
-    })
+    });
 
     invalidateCategories(category);
 
     this.closeModal();
+  };
 
-    
-
-  }
-
-  render () {
-    const { modalShowing } = this.state
-    const { allCategories } = this.props
+  render() {
+    const { modalShowing } = this.state;
+    const { allCategories } = this.props;
 
     return (
       <div>
-          <button 
-            className="add-post-button" 
-            onClick={this.openModal}
-          >
-            Add Post
-          </button>
+        <button className="add-post-button" onClick={this.openModal}>
+          Add Post
+        </button>
 
-          <Modal
-            // className='modal'
-            // overlayClassName='overlay'
-            isOpen={modalShowing}
-            onRequestClose={this.closeModal}
-            contentLabel='Modal'
-            // Figure out whether to use hid app element below
-            ariaHideApp={false}
-          > 
-            <div className="add-post-input">
-              <div className="add-post-heading">
-                <h2>Add New Post:</h2>
-              </div>
-              <div className="add-post-user">
-                UserName:
-                <input type="text" placeholder="user name" id="input-username" />
-              </div>
-              <div className="add-post-category">
-                Category:
-                {/* <input type="text" placeholder="category" id="input-category" /> */}
-                <select name="input-category" id="input-category">
-                  {allCategories && allCategories.map((category) => (
+        <Modal
+          // className='modal'
+          // overlayClassName='overlay'
+          isOpen={modalShowing}
+          onRequestClose={this.closeModal}
+          contentLabel="Modal"
+          // Figure out whether to use hid app element below
+          ariaHideApp={false}
+        >
+          <div className="add-post-input">
+            <div className="add-post-heading">
+              <h2>Add New Post:</h2>
+            </div>
+            <div className="add-post-user">
+              UserName:
+              <input type="text" placeholder="user name" id="input-username" />
+            </div>
+            <div className="add-post-category">
+              Category:
+              {/* <input type="text" placeholder="category" id="input-category" /> */}
+              <select name="input-category" id="input-category">
+                {allCategories &&
+                  allCategories.map(category => (
                     <option value={category}>{category}</option>
                   ))}
-                </select>
-              </div>
-              <div className="add-post-title">
-                Title:
-                <input type="text" placeholder="title" id="input-title" />
-              </div>
-              <div className="add-post-body">
-                Body:
-                <textarea placeholder="body" id="input-body" />
-              </div>
-              <button onClick={this.submitPost}>Submit</button>
+              </select>
             </div>
-          </Modal>
+            <div className="add-post-title">
+              Title:
+              <input type="text" placeholder="title" id="input-title" />
+            </div>
+            <div className="add-post-body">
+              Body:
+              <textarea placeholder="body" id="input-body" />
+            </div>
+            <button onClick={this.submitPost}>Submit</button>
+          </div>
+        </Modal>
       </div>
-    )
+    );
   }
 }
 
@@ -101,16 +95,16 @@ const MapStateToProps = (state, ownProps) => {
   return {
     categories: state.categories.byName,
     allCategories: state.categories.allCategories
-  }
-}
+  };
+};
 
-const MapDispatchToProps = (dispatch) => {
+const MapDispatchToProps = dispatch => {
   return {
-    invalidateCategories: (category) => {
+    invalidateCategories: category => {
       dispatch(invalidateCategory(category));
-      dispatch(invalidateCategory('all'))
+      dispatch(invalidateCategory("all"));
     }
-  }
-}
+  };
+};
 
-export default connect(MapStateToProps, MapDispatchToProps)(AddPost) 
+export default connect(MapStateToProps, MapDispatchToProps)(AddPost);

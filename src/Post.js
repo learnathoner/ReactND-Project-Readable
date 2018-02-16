@@ -27,10 +27,25 @@ const Post = ({ post }) => (
           <span>By:</span> {post.author}
         </p>
         <p className="post-category">
-          <span>Posted in:</span> {post.category}
+          <span>Posted in:</span> 
+          <Link 
+            to={`/r/${post.category}`}
+            style={{
+              textDecoration: 'none'
+            }}
+          >
+            {post.category}
+          </Link>
         </p>
         <p className="post-comment-count">
-          <span>Comments:</span> {post.commentCount}
+          <Link 
+            to={`/post/${post.id}`}
+            style={{
+              textDecoration: 'none'
+            }}
+          >
+            <span>Comments:</span> {post.commentCount}
+          </Link>
         </p>
         <p className="post-time-stamp">
           <span>Posted On: </span> 

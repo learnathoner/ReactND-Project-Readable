@@ -173,3 +173,21 @@ span {
   justify-content: space-around;
   padding: 5px;
 }
+
+.sort-date, .rating {
+  display: flex;
+}
+
+.sort-date *, .rating * {
+  font-size: small;
+  padding: 0 5px;
+}
+
+.sort-date *:hover, 
+  .rating *:hover, 
+  .clear:hover {
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 3px 3px 3px rgb(173, 173, 118);
+}
+

@@ -8,6 +8,18 @@
 //   category: 'react'
 // }
 
+// // Sample comment
+// addComment({
+//   id: 1,
+//   parentId: '8xf0y6ziyjabvozdd253nd',
+//   timestamp: 1,
+//   body: 'test',
+//   author: 'mike',
+//   voteScore: 1,
+//   deleted: false,
+//   parentDeleted: false
+// })
+
 const headers = { 
  'Authorization': 'Guest' 
 }
@@ -19,24 +31,24 @@ export const getCats = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories)
-
-// Return Posts in Category
-export const getCatPosts = (category) =>
-  fetch(`${api}/${category}/posts`, { headers })
+    
+    // Return Posts in Category
+    export const getCatPosts = (category) =>
+    fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
-
-// Returns Posts {id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted}
-export const getPosts = () =>
-  fetch(`${api}/posts`, { headers })
+    
+    // Returns Posts {id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted}
+    export const getPosts = () =>
+    fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
-
-// Add post, reguires: id, timeStamp, title, body, author, and category
-export const addPost = ({ id, timestamp, title, body, author, category }) =>
-  fetch(`${api}/posts`, {
-    method: 'POST',
-    headers: {
+    
+    // Add post, reguires: id, timeStamp, title, body, author, and category
+    export const addPost = ({ id, timestamp, title, body, author, category }) =>
+    fetch(`${api}/posts`, {
+      method: 'POST',
+      headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
@@ -50,6 +62,21 @@ export const getComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
     .then(comments => comments)
+
+// Add comment, reguires: id, parentId, timestamp, body, author, voteScore
+export const addComment = ({ id, parentId, timestamp, body, author, voteScore }) =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id, parentId, timestamp, body, author, voteScore,
+      deleted: false,
+      parentDeleted: false
+    })
+  }).then(res => res.json())
 
 
 // Get posts/:id - single post
