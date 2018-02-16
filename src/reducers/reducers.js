@@ -7,7 +7,8 @@ import {
   FETCH_POSTS,
   INVALIDATE_CATEGORY,
   RECEIVE_CATEGORIES,
-  RECEIVE_COMMENTS
+  RECEIVE_COMMENTS,
+  SET_SORT
 } from '../actions/actions'
 
 export function selectedCategory(state = '', action) {
@@ -112,12 +113,27 @@ export function commentsByPost(state={}, action) {
   }
 }
 
+export function sorter(state={}, action) {
+  const { criteria, order } = action;
+
+  switch (action.type) {
+    case SET_SORT:
+      return {
+        criteria: criteria,
+        order: order    
+      }
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   postsByCategory,
   selectedCategory,
   categories,
   postsByID,
-  commentsByPost
+  commentsByPost,
+  sorter
 })
 
 export default rootReducer

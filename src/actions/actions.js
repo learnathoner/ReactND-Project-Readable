@@ -57,6 +57,16 @@ export function receiveComments(id, comments) {
   };
 }
 
+export const SET_SORT = "SET_SORT";
+
+export function setSort(criteria, order) {
+  return {
+    type: SET_SORT,
+    criteria,
+    order
+  }
+}
+
 // THUNK ACTION
 // Fetches posts from API, changes state while requesting, changes again when found
 // TODO: Add error handling

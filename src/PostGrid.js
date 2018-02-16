@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Post from './Post'
 import { connect } from 'react-redux'
-import { selectCategory, fetchPostsIfNeeded } from './actions/actions'
+import { selectCategory, fetchPostsIfNeeded} from './actions/actions'
 
 class PostGrid extends Component {
 
@@ -13,9 +13,10 @@ class PostGrid extends Component {
       changeCategory,
       fetchPostsIfNeeded } = this.props;
 
+      
     // If URL is different than currently selected category
     if (selectedCategory !== currentCategory) {
-
+        
       // Change selectedCategory to current slug /r/:category
       changeCategory(currentCategory);
 
@@ -41,11 +42,25 @@ class PostGrid extends Component {
 } 
 
 const mapStateToProps = (state, ownProps) => {
-  // Maps post IDs from state.postsByCategory to post in state.postsById
+  // Checks state.selectedCategory is loaded to collect postIDs
   const postIDs = state.postsByCategory[state.selectedCategory]
-    ? state.postsByCategory[state.selectedCategory].items
-    : [];
-  const posts = postIDs && postIDs.map((id) => state.postsByID[id]);
+  ? state.postsByCategory[state.selectedCategory].items
+  : [];
+  
+  // Maps post IDs from state.postsByCategory to post in state.postsById
+  let posts = postIDs && postIDs.map((id) => state.postsByID[id]);
+
+  // If sorter active, sort posts based on criteria and order
+  if (state.sorter.criteria) {
+    const { criteria, order } = state.sorter;
+
+    posts = posts.sort((post1, post2) => {
+      return order === 'ascending'
+        ? post1[criteria] - post2[criteria]
+        : post2[criteria] - post1[criteria]
+    })
+  }
+
   return {
     categories: state.categories.byName,
     selectedCategory: state.selectedCategory,
@@ -56,7 +71,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCategory: (category) => { dispatch(selectCategory(category)) },
-    fetchPostsIfNeeded: (category) => dispatch(fetchPostsIfNeeded(category))
+    fetchPostsIfNeeded: (category) => dispatch(fetchPostsIfNeeded(category)),
   }
 }
 

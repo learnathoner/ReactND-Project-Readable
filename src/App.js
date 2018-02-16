@@ -3,6 +3,7 @@ import Header from "./Header";
 import PageContent from "./PageContent";
 import PostGrid from './PostGrid'
 import PostPage from "./PostPage";
+import SortBar from './SortBar'
 import * as FeedsAPI from "./FeedsAPI";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <SortBar />
 
         <Switch>
           <Route exact path="/" component={PostGrid} />
