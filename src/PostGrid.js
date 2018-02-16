@@ -15,7 +15,7 @@ class PostGrid extends Component {
 
       
     // If URL is different than currently selected category
-    if (selectedCategory !== currentCategory) {
+    // if (selectedCategory !== currentCategory) {
         
       // Change selectedCategory to current slug /r/:category
       changeCategory(currentCategory);
@@ -24,7 +24,7 @@ class PostGrid extends Component {
       if (categories && selectedCategory in categories) {
         fetchPostsIfNeeded(currentCategory);
       }
-    }
+    // }
 
     return (<div className="posts-container">
         <ul className="posts">

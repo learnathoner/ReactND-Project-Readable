@@ -14,12 +14,12 @@ class AddPost extends Component {
   closeModal = () => this.setState({ modalShowing: false })
 
   submitPost = () => {
-    const id = 1;
+    const id = 3;
     const author = document.getElementById('input-username').value
     const category = document.getElementById('input-category').value
     const title = document.getElementById('input-title').value
     const body = document.getElementById('input-body').value
-    const timeStamp = Date.now()
+    const timestamp = Date.now()
 
     addPost({
       id,
@@ -27,7 +27,7 @@ class AddPost extends Component {
       category,
       title,
       body,
-      timeStamp
+      timestamp
     })
 
     this.closeModal();

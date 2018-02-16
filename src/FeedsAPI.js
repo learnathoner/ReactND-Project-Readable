@@ -33,7 +33,7 @@ export const getPosts = () =>
     .then(data => data)
 
 // Add post, reguires: id, timeStamp, title, body, author, and category
-export const addPost = ({ id, timeStamp, title, body, author, category }) =>
+export const addPost = ({ id, timestamp, title, body, author, category }) =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
@@ -41,7 +41,7 @@ export const addPost = ({ id, timeStamp, title, body, author, category }) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      id, timeStamp, title, body, author, category
+      id, timestamp, title, body, author, category
     })
   }).then(res => res.json())
 
