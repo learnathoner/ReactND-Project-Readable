@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Category from './Category'
-import { selectCategory, fetchPostsIfNeeded } from './actions/actions'
 import { connect } from 'react-redux'
 
 class CategoriesBar extends Component {

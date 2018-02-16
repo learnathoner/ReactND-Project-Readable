@@ -11,7 +11,7 @@ class PostPage extends Component {
   }
 
   render () {
-    const { postByID, clearCategory, commentsByID } = this.props;
+    const { postByID, commentsByID } = this.props;
 
     if (!postByID) {
       return (

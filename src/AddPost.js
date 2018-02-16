@@ -14,7 +14,7 @@ class AddPost extends Component {
   closeModal = () => this.setState({ modalShowing: false })
 
   submitPost = () => {
-    const id = 3;
+    const id = uuid();
     const author = document.getElementById('input-username').value
     const category = document.getElementById('input-category').value
     const title = document.getElementById('input-title').value

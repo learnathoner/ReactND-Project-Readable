@@ -11,6 +11,8 @@ import {
   SET_SORT
 } from '../actions/actions'
 
+// SELECTED CATEGORY
+// Tracks Currently Selected Category for Category Bar and Post Grid
 export function selectedCategory(state = '', action) {
   switch (action.type) {
     case SELECT_CATEGORY:
@@ -20,6 +22,8 @@ export function selectedCategory(state = '', action) {
   }
 }
 
+// POSTS
+// Manages individual post objects, called by async handler
 function posts(
   state={
     isFetching: false,
@@ -54,6 +58,9 @@ function posts(
   }
 }
 
+// POSTS BY CATEGORY
+// Stores { postsByCategory: [posts] } for easier sorting
+// Calls posts reducer
 export function postsByCategory(state={}, action) {
   switch (action.type) {
     case INVALIDATE_CATEGORY:
@@ -69,6 +76,8 @@ export function postsByCategory(state={}, action) {
   }
 }
 
+// POSTS BY ID
+// When receiving posts from handler, stores each post by its ID
 export function postsByID(state={}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
@@ -85,6 +94,8 @@ export function postsByID(state={}, action) {
   }
 }
 
+// CATEGORIES
+// Receives list of all categories, returns { byName: {}, allCategories: [] }
 export function categories(state={}, action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
@@ -101,6 +112,8 @@ export function categories(state={}, action) {
   }
 }
 
+// COMMENTS BY POST
+// Receives all comments linked to a post ID
 export function commentsByPost(state={}, action) {
   switch (action.type) {
     case RECEIVE_COMMENTS:
@@ -113,6 +126,8 @@ export function commentsByPost(state={}, action) {
   }
 }
 
+// SORTER
+// Tells app what criteria and order to sort posts / comments by
 export function sorter(state={}, action) {
   const { criteria, order } = action;
 
