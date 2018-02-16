@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Modal from 'react-modal'
 import uuid from 'uuid'
 import { addPost } from './FeedsAPI'
+import { connect } from 'react-redux'
+import { invalidateCategory } from './actions/actions'
 
 class AddPost extends Component {
 
@@ -21,6 +23,8 @@ class AddPost extends Component {
     const body = document.getElementById('input-body').value
     const timestamp = Date.now()
 
+    const { categories, invalidateCategories } = this.props;
+
     addPost({
       id,
       author,
@@ -30,12 +34,17 @@ class AddPost extends Component {
       timestamp
     })
 
+    invalidateCategories(category);
+
     this.closeModal();
+
+    
 
   }
 
   render () {
     const { modalShowing } = this.state
+    const { allCategories } = this.props
 
     return (
       <div>
@@ -65,7 +74,12 @@ class AddPost extends Component {
               </div>
               <div className="add-post-category">
                 Category:
-                <input type="text" placeholder="category" id="input-category" />
+                {/* <input type="text" placeholder="category" id="input-category" /> */}
+                <select name="input-category" id="input-category">
+                  {allCategories && allCategories.map((category) => (
+                    <option value={category}>{category}</option>
+                  ))}
+                </select>
               </div>
               <div className="add-post-title">
                 Title:
@@ -83,4 +97,20 @@ class AddPost extends Component {
   }
 }
 
-export default AddPost 
+const MapStateToProps = (state, ownProps) => {
+  return {
+    categories: state.categories.byName,
+    allCategories: state.categories.allCategories
+  }
+}
+
+const MapDispatchToProps = (dispatch) => {
+  return {
+    invalidateCategories: (category) => {
+      dispatch(invalidateCategory(category));
+      dispatch(invalidateCategory('all'))
+    }
+  }
+}
+
+export default connect(MapStateToProps, MapDispatchToProps)(AddPost) 

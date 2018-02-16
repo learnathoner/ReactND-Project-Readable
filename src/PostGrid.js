@@ -20,7 +20,7 @@ class PostGrid extends Component {
       // Change selectedCategory to current slug /r/:category
       changeCategory(currentCategory);
 
-      // If current slug is in categories, load posts for it
+      // Checks each render if necessary to reload posts
       if (categories && selectedCategory in categories) {
         fetchPostsIfNeeded(currentCategory);
       }
