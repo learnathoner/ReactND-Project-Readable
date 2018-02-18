@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-const Post = ({ post }) => (
+const Post = ({ post, editPost }) => (
+
   <div className="post-container">
     <div className="post-rank">
       <span>Rank</span>  
@@ -50,6 +51,9 @@ const Post = ({ post }) => (
         <p className="post-time-stamp">
           <span>Posted On: </span> 
           {moment.utc(post.timestamp).format('l')}
+        </p>
+        <p>
+          <a href="#" onClick={() => editPost(post.id)}>Edit</a>
         </p>
       </div>
     </div>
