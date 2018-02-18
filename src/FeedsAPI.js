@@ -78,6 +78,19 @@ export const addComment = ({ id, parentId, timestamp, body, author, voteScore })
     })
   }).then(res => res.json())
 
+// UPDATE POST  
+export const updatePost = (post) => {
+  const { id, title, body } = post
+
+  return fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, body })
+  }).then(res => res.json())
+}
 
 // Get posts/:id - single post
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"
@@ -91,15 +104,6 @@ export const addComment = ({ id, parentId, timestamp, body, author, voteScore })
 // Delete /comments/:id
 
 
-// export const updateRating = (book, rating) =>
-//   fetch(`${api}/books/${book.id}`, {
-//     method: 'PUT',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ rating: rating })
-//   }).then(res => res.json())
 
 // export const search = (query) =>
 //   fetch(`${api}/search`, {

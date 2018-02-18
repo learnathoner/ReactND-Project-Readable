@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Post from './Post'
 import { connect } from 'react-redux'
-import { selectCategory, fetchPostsIfNeeded} from './actions/actions'
+import { selectCategory, fetchPostsIfNeeded, updatePostHandler } from './actions/actions'
 import Modal from 'react-modal'
 import { postsByID } from './reducers/reducers';
 
@@ -18,6 +18,8 @@ class PostGrid extends Component {
     } 
   }
 
+  // EDIT POST
+  // When edit clicked, opens Modal and sets editedPost to current post info
   editPost = (editId) => {
     const { postsByID } = this.props;
     const { id, author, category, body, title } = postsByID[editId]
@@ -33,11 +35,30 @@ class PostGrid extends Component {
       }
     })    
   }
-  // TODO: Finish submitEdit
-  submitEdit = () => {
-    alert(document.getElementById('input-edit-username').value)
+
+  // HANDLE CHANGE
+  // When input in modal changed, changes corresponding field in state.editedPost
+  handleChange = (e) => {
+    this.setState({
+      editedPost: {
+        ...this.state.editedPost,
+        [e.target.id] : e.target.value
+      }
+    })
   }
 
+  // SUBMIT EDIT
+  // Sends post to be updated in API, then updates post in postsById, closes Modal
+  submitEdit = () => {
+    const { editedPost } = this.state
+    const { updatePost } = this.props
+
+    updatePost(editedPost)
+    this.closeModal();
+  }
+
+  // CLOSE MODAL
+  // REsets the state.editedPost, closes Modal
   closeModal = () => {
     this.setState({
       modalShowing: false,
@@ -47,7 +68,7 @@ class PostGrid extends Component {
         category: '',
         body: '',
         title: ''
-      } 
+      }
     })
   }
 
@@ -98,27 +119,18 @@ class PostGrid extends Component {
               <h2>Edit Post:</h2>
             </div>
             <div className="add-post-user">
-              UserName:
-              <input type="text" value={editedPost.author} id="input-edit-username" />
+              Author: {editedPost.author}
             </div>
             <div className="add-post-category">
-              Category:
-              <select name="input-category" id="input-category">
-                {allCategories &&
-                  allCategories.map(category => (
-                    category === editedPost.category 
-                      ? <option value={category} selected>{category}</option>
-                      : <option value={category}>{category}</option>
-                  ))}
-              </select>
+              Category: {editedPost.category}
             </div>
             <div className="add-post-title">
               Title:
-              <input type="text" value={editedPost.title} id="input-title" />
+              <input type="text" onChange={this.handleChange} value={editedPost.title} id="title" />
             </div>
             <div className="add-post-body">
               Body:
-              <textarea value={editedPost.body} id="input-body" />
+              <textarea value={editedPost.body} id="body" onChange={this.handleChange} />
             </div>
             <hr />
             <button onClick={this.submitEdit}>Submit</button>
@@ -165,6 +177,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeCategory: (category) => { dispatch(selectCategory(category)) },
     fetchPostsIfNeeded: (category) => dispatch(fetchPostsIfNeeded(category)),
+    updatePost: (post) => dispatch(updatePostHandler(post))
   }
 }
 

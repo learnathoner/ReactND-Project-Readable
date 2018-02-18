@@ -1,4 +1,11 @@
-import { getPosts, getCats, getCatPosts, getComments, addComment } from "../FeedsAPI";
+import { 
+  getPosts, 
+  getCats, 
+  getCatPosts,
+  getComments, 
+  addComment,
+  updatePost 
+} from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
 
@@ -25,6 +32,15 @@ export function requestPosts(category) {
     type: REQUEST_POSTS,
     category
   };
+}
+
+export const UPDATE_POST = "UPDATE_POST";
+
+export function updatePostAction(post) {
+  return {
+    type: UPDATE_POST,
+    post
+  }
 }
 
 export const RECEIVE_POSTS = "RECIEVE_POSTS";
@@ -109,6 +125,16 @@ export function fetchPostsIfNeeded(category) {
       return Promise.resolve();
     }
   };
+}
+
+// Sends call to API to update post, then updates post info in store
+export function updatePostHandler(post) {
+  return function(dispatch) {
+    return updatePost(post)
+      .then(() => {
+        return dispatch(updatePostAction(post))
+      })
+  }
 }
 
 // Fetch Categories

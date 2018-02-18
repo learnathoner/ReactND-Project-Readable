@@ -9,7 +9,8 @@ import {
   RECEIVE_CATEGORIES,
   RECEIVE_COMMENTS,
   SET_SORT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  UPDATE_POST
 } from '../actions/actions'
 
 // SELECTED CATEGORY
@@ -81,6 +82,16 @@ export function postsByCategory(state={}, action) {
 // When receiving posts from handler, stores each post by its ID
 export function postsByID(state={}, action) {
   switch (action.type) {
+    case UPDATE_POST:
+      const { id, title, body } = action.post
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          title,
+          body
+        }
+      }
     case RECEIVE_POSTS:
       const newState = { ...state }
       
