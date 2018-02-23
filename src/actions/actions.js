@@ -58,12 +58,11 @@ export function receivePosts(category, posts) {
 // DELETE POST 
 export const DELETE_POST = "DELETE_POST";
 
-export function deletePostAction(id) {
+export function deletePostAction(id, category) {
   return {
     type: DELETE_POST,
-    post: {
-      id
-    }
+    id,
+    category
   }
 }
 
@@ -102,10 +101,10 @@ export function setSort(criteria, order) {
 
 // DELETE POST THUNK HANDLER
 // Sends DELETE_POST_API, then dispatches (deletePostAction)
-export function deletePostThunk(id) {
+export function deletePostThunk(id, category) {
   return function (dispatch) {
     return DELETE_POST_API(id)
-      .then(() => dispatch(deletePostAction(id)))
+      .then(() => dispatch(deletePostAction(id, category)))
   }
 }
 

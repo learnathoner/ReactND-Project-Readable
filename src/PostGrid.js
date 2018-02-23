@@ -5,7 +5,8 @@ import {
   selectCategory, 
   fetchPostsIfNeeded, 
   updatePostHandler,
-  deletePostThunk
+  deletePostThunk,
+  invalidateCategory
 } from './actions/actions'
 import Modal from 'react-modal'
 import { postsByID } from './reducers/reducers';
@@ -81,13 +82,15 @@ class PostGrid extends Component {
   // Handles post deletion
   deletePost = () => {
     const { id } = this.state.editedPost
+    const { deletePostThunk, invalidateCategories, selectedCategory } = this.props
 
     // TODO: Create styled alert window
     const deleteOption = window.confirm("Delete post\nAre you sure?")
 
+    // If select yes to prompt, deletes from postsByID and postsByCategory, refreshes cat
     if (deleteOption) {
-      this.props.deletePostThunk(id);
-      this.props.fetchPostsIfNeeded();
+      deletePostThunk(id, selectedCategory);
+      invalidateCategories(selectedCategory)
       this.closeModal();
     }
   }
@@ -103,17 +106,17 @@ class PostGrid extends Component {
     const { modalShowing, editedPost } = this.state
 
       
-    // If URL is different than currently selected category
-    // if (selectedCategory !== currentCategory) {
-        
-      // Change selectedCategory to current slug /r/:category
+    // If URL is different than currently selected category, change selected category to slug
+    if (selectedCategory !== currentCategory) {
       changeCategory(currentCategory);
+    }
 
-      // Checks each render if necessary to reload posts
-      if (categories && selectedCategory in categories) {
-        fetchPostsIfNeeded(currentCategory);
-      }
-    // }
+    // Checks each render if necessary to reload posts
+    if (categories && selectedCategory in categories) {
+      fetchPostsIfNeeded(currentCategory);
+    }
+
+    console.log(JSON.stringify(posts));
 
     return (<div className="posts-container">
         <ul className="posts">
@@ -177,6 +180,7 @@ const mapStateToProps = (state, ownProps) => {
 
   // If sorter active, sort posts based on criteria and order
   if (state.sorter.criteria) {
+    // TODO: Separate into sorting function
     const { criteria, order } = state.sorter;
 
     posts = posts.sort((post1, post2) => {
@@ -200,7 +204,11 @@ const mapDispatchToProps = (dispatch) => {
     changeCategory: (category) => { dispatch(selectCategory(category)) },
     fetchPostsIfNeeded: (category) => dispatch(fetchPostsIfNeeded(category)),
     updatePost: (post) => dispatch(updatePostHandler(post)),
-    deletePostThunk: (id) => dispatch(deletePostThunk(id))
+    deletePostThunk: (id, category) => dispatch(deletePostThunk(id, category)),
+    invalidateCategories: category => {
+      dispatch(invalidateCategory(category));
+      dispatch(invalidateCategory("all"));
+    }
   }
 }
 

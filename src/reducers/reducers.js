@@ -27,14 +27,7 @@ export function selectedCategory(state = '', action) {
 
 // POSTS
 // Manages individual post objects, called by async handler
-function posts(
-  state={
-    isFetching: false,
-    didInvalidate: false,
-    items: []
-  },
-  action
-) {
+function posts( state = { isFetching: false, didInvalidate: false, items: [] }, action) {
   switch (action.type) {
     case INVALIDATE_CATEGORY:
       return {
@@ -65,13 +58,21 @@ function posts(
 // Stores { postsByCategory: [posts] } for easier sorting
 // Calls posts reducer
 export function postsByCategory(state={}, action) {
+  const { category, id } = action;
+
   switch (action.type) {
+    // TODO: REMOVE DELETEPOST FROM CATEGORY
+    case DELETE_POST:
+      let storeCopy = { ...state }
+      // Fiters category items not to include the id sent
+      storeCopy[category].items = storeCopy[category].items.filter(catPostId => catPostId !== id)
+      return storeCopy;
     case INVALIDATE_CATEGORY:
     case REQUEST_POSTS:
     case RECEIVE_POSTS:
       return {
         ...state,
-        [action.category]: posts(state[action.category], action)
+        [category]: posts(state[category], action)
       }
     default:
       return state;
@@ -85,7 +86,7 @@ export function postsByID(state={}, action) {
   
   switch (action.type) {
     case DELETE_POST:
-      const postId = action.post.id
+      const postId = action.id
       // TODO: Less clunk way to remove property?
       let storeCopy = { ... state }
       delete storeCopy[postId]
