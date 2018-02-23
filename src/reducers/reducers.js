@@ -10,7 +10,8 @@ import {
   RECEIVE_COMMENTS,
   SET_SORT,
   ADD_COMMENT,
-  UPDATE_POST
+  UPDATE_POST,
+  DELETE_POST
 } from '../actions/actions'
 
 // SELECTED CATEGORY
@@ -81,16 +82,23 @@ export function postsByCategory(state={}, action) {
 // POSTS BY ID
 // When receiving posts from handler, stores each post by its ID
 export function postsByID(state={}, action) {
+  
   switch (action.type) {
+    case DELETE_POST:
+      const postId = action.post.id
+      // TODO: Less clunk way to remove property?
+      let storeCopy = { ... state }
+      delete storeCopy[postId]
+      return storeCopy;
     case UPDATE_POST:
       const { id, title, body } = action.post
       return {
-        ...state,
-        [id]: {
-          ...state[id],
-          title,
-          body
-        }
+          ...state,
+          [id]: {
+            ...state[id],
+            title,
+            body
+          }
       }
     case RECEIVE_POSTS:
       const newState = { ...state }
@@ -104,6 +112,7 @@ export function postsByID(state={}, action) {
     default:
       return state
   }
+
 }
 
 // CATEGORIES

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import Post from './Post'
 import { connect } from 'react-redux'
-import { selectCategory, fetchPostsIfNeeded, updatePostHandler } from './actions/actions'
+import { 
+  selectCategory, 
+  fetchPostsIfNeeded, 
+  updatePostHandler,
+  deletePostThunk
+} from './actions/actions'
 import Modal from 'react-modal'
 import { postsByID } from './reducers/reducers';
 
@@ -72,6 +77,21 @@ class PostGrid extends Component {
     })
   }
 
+  // DELETE POST
+  // Handles post deletion
+  deletePost = () => {
+    const { id } = this.state.editedPost
+
+    // TODO: Create styled alert window
+    const deleteOption = window.confirm("Delete post\nAre you sure?")
+
+    if (deleteOption) {
+      this.props.deletePostThunk(id);
+      this.props.fetchPostsIfNeeded();
+      this.closeModal();
+    }
+  }
+
   render() {
     const { posts } = this.props
     const currentCategory = this.props.match.params.category || 'all';
@@ -105,7 +125,9 @@ class PostGrid extends Component {
               </li>
             ))}
         </ul>
+
         <Modal
+          // DISPLAYED WHEN EDITING POST
           // className='modal'
           // overlayClassName='overlay'
           isOpen={modalShowing}
@@ -177,7 +199,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeCategory: (category) => { dispatch(selectCategory(category)) },
     fetchPostsIfNeeded: (category) => dispatch(fetchPostsIfNeeded(category)),
-    updatePost: (post) => dispatch(updatePostHandler(post))
+    updatePost: (post) => dispatch(updatePostHandler(post)),
+    deletePostThunk: (id) => dispatch(deletePostThunk(id))
   }
 }
 

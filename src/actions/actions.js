@@ -4,7 +4,8 @@ import {
   getCatPosts,
   getComments, 
   addComment,
-  updatePost 
+  updatePost,
+  DELETE_POST_API
 } from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
@@ -54,6 +55,18 @@ export function receivePosts(category, posts) {
   };
 }
 
+// DELETE POST 
+export const DELETE_POST = "DELETE_POST";
+
+export function deletePostAction(id) {
+  return {
+    type: DELETE_POST,
+    post: {
+      id
+    }
+  }
+}
+
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
 
 export function receiveCategories(categories) {
@@ -87,6 +100,17 @@ export function setSort(criteria, order) {
 // Fetches posts from API, changes state while requesting, changes again when found
 // TODO: Add error handling
 
+// DELETE POST THUNK HANDLER
+// Sends DELETE_POST_API, then dispatches (deletePostAction)
+export function deletePostThunk(id) {
+  return function (dispatch) {
+    return DELETE_POST_API(id)
+      .then(() => dispatch(deletePostAction(id)))
+  }
+}
+
+// FETCH POSTS
+// Fetches all posts for home category, or fetches selected category
 export function fetchPosts(category) {
   return function(dispatch) {
     dispatch(requestPosts(category));
@@ -103,8 +127,8 @@ export function fetchPosts(category) {
   };
 }
 
+// SHOULD FETCH POSTS
 // Tells below function whether it needs to fetch posts
-
 export function shouldFetchPosts(state, category) {
   const posts = state.postsByCategory[category];
 
@@ -117,6 +141,8 @@ export function shouldFetchPosts(state, category) {
   }
 }
 
+// FETCH POSTS IF NEEDED
+// dispatches fetchPosts pending result of shouldFetchPosts
 export function fetchPostsIfNeeded(category) {
   return (dispatch, getState) => {
     if (shouldFetchPosts(getState(), category)) {
@@ -127,6 +153,7 @@ export function fetchPostsIfNeeded(category) {
   };
 }
 
+// UPDATE POST THUNK HANDLER
 // Sends call to API to update post, then updates post info in store
 export function updatePostHandler(post) {
   return function(dispatch) {

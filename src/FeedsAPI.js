@@ -32,30 +32,37 @@ export const getCats = () =>
     .then(res => res.json())
     .then(data => data.categories)
     
-    // Return Posts in Category
-    export const getCatPosts = (category) =>
-    fetch(`${api}/${category}/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data)
-    
-    // Returns Posts {id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted}
-    export const getPosts = () =>
-    fetch(`${api}/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data)
-    
-    // Add post, reguires: id, timeStamp, title, body, author, and category
-    export const addPost = ({ id, timestamp, title, body, author, category }) =>
-    fetch(`${api}/posts`, {
-      method: 'POST',
-      headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id, timestamp, title, body, author, category
-    })
-  }).then(res => res.json())
+// Return Posts in Category
+export const getCatPosts = (category) =>
+fetch(`${api}/${category}/posts`, { headers })
+.then(res => res.json())
+.then(data => data)
+
+// Returns Posts {id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted}
+export const getPosts = () =>
+fetch(`${api}/posts`, { headers })
+.then(res => res.json())
+.then(data => data)
+
+// Gets single post
+// Get posts/:id - single post
+export const getPost = (id) =>
+  fetch(`${api}/posts/${id}`, { headers })
+  .then(res => res.json())
+  .then(data => data)
+
+// Add post, reguires: id, timeStamp, title, body, author, and category
+export const addPost = ({ id, timestamp, title, body, author, category }) =>
+fetch(`${api}/posts`, {
+  method: 'POST',
+  headers: {
+  ...headers,
+  'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+  id, timestamp, title, body, author, category
+})
+}).then(res => res.json())
 
 // Returns comments by ID
 export const getComments = (id) =>
@@ -92,10 +99,18 @@ export const updatePost = (post) => {
   }).then(res => res.json())
 }
 
-// Get posts/:id - single post
+// DELETE POST
+// delete /posts/:id - sets deleted flag to true
+export const DELETE_POST_API = (id) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers
+  }).then(res => res.json())
+}
+
+
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"
 // Put /posts:id - Edit details of posts, takes title and body
-// DELETE /posts/:id - sets deleted flag to true
 // Get posts/:id/comments - all comments for single post
 // Post /comments add a comment
 // Get /comments/:id
