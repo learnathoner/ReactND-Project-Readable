@@ -1,0 +1,22 @@
+Readable:
+
+  Comments:
+    ☐ Add Edit
+    ☐ Add Delete
+      ☐ Delete API call
+      ☐ Delete action
+      ☐ Delete Reducer
+      ☐ Delete button integration
+
+  Posts:
+    ☐ Change to inline edit instead of pop-up @critical
+      ☐ Comment edit on category page links to post page
+      ☐ Post page has state for editing posts
+  
+  HTML Form Validation:
+    ☐ Comments
+    ☐ New post / add post
+
+  SweetAlert Pop-ups (if necessary):
+    ☐ Delete
+    ☐ Add post / add comment
