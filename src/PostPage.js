@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectCategory, fetchComments, addCommentAction } from './actions/actions'
 import Post from './Post'
+import Comment from './Comment'
 import { addComment } from './FeedsAPI'
 import uuid from 'uuid'
 
@@ -23,6 +24,7 @@ class PostPage extends Component {
     if (!author || !body) {
       alert('Must have username and comment text')
     } else {
+      
       const newComment = {
         id,
         parentId,
@@ -75,11 +77,10 @@ class PostPage extends Component {
 
         <div className="comments">
           {commentsByID && commentsByID.map((comment) => (
-            <div key={comment.id}>Comment: {comment.body}</div>
+            < Comment comment={comment} key={comment.id} />
           ))}
         </div>
       </div>
-
     )
   }
 }

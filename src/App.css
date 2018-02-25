@@ -191,3 +191,31 @@ span {
   text-shadow: 3px 3px 3px rgb(173, 173, 118);
 }
 
+/*
+*
+* COMMENT STYLING
+*
+*
+*/
+
+.comment-container {
+  width: 100%;
+  display: flex;
+}
+
+.comment-container > div {
+  padding: 5px 2px;
+}
+
+.comment-rate-buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.comment-header, .comment-footer {
+  font-size: small;
+}
+
+.comment-content-container * {
+  padding: 2px;
+}
