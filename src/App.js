@@ -21,8 +21,6 @@ class App extends Component {
           <Route path="/post/:id" component={PostPage} />
         </Switch>
 
-        <AddPost />
-
       </div>
     );
   }

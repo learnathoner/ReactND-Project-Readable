@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Post from './Post'
+import AddPost from './AddPost'
 import { connect } from 'react-redux'
 import { 
   selectCategory, 
@@ -164,6 +165,8 @@ class PostGrid extends Component {
             <button onClick={this.deletePost}>DELETE</button>
           </div>
         </Modal>
+
+        <AddPost selectedCategory={selectedCategory} />
       </div>
     )
   }

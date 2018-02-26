@@ -1,6 +1,7 @@
 Readable:
 
   Comments:
+    ✔ Integrate Moments @done (2018-2-25 17:51:23)
     ☐ Add Edit
     ☐ Add Delete
       ☐ Delete API call
@@ -9,14 +10,34 @@ Readable:
       ☐ Delete button integration
 
   Posts:
-    ☐ Change to inline edit instead of pop-up @critical
+    ☐ Change to inline edit instead of pop-up 
       ☐ Comment edit on category page links to post page
       ☐ Post page has state for editing posts
-  
-  HTML Form Validation:
-    ☐ Comments
-    ☐ New post / add post
+      Notes:
+        * Would it work?
+    
+    Add Posts:
+      ✔ Make current category default selected @done (2018-2-25 19:54:00)
+      ✔ Remove all from options @high @done (2018-2-25 19:54:06)
+      ☐ Disable Add post button from post-page
 
-  SweetAlert Pop-ups (if necessary):
-    ☐ Delete
-    ☐ Add post / add comment
+    PostPage:
+      ☐ Move sort-bar to apply to comments
+      ☐ Apply editpost to postPage
+      ✔ Remove add button from posts page @done (2018-2-25 19:40:32)
+  
+  Structure:
+    ☐ Separate EditPost Modal from PostGrid
+
+  Ratings:
+    ☐ Implement Rating buttons for posts and comments
+  
+  Additional Features:
+
+    HTML Form Validation:
+      ☐ Comments
+      ☐ New post / add post
+
+    SweetAlert Pop-ups (if necessary):
+      ☐ Delete
+      ☐ Add post / add comment

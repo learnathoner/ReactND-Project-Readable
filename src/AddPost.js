@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { invalidateCategory } from "./actions/actions";
 
 class AddPost extends Component {
+  // PropTypes = selectedCategory
+
   state = {
     modalShowing: false
   };
@@ -40,7 +42,7 @@ class AddPost extends Component {
 
   render() {
     const { modalShowing } = this.state;
-    const { allCategories } = this.props;
+    const { allCategories, selectedCategory } = this.props;
 
     return (
       <div>
@@ -68,9 +70,15 @@ class AddPost extends Component {
             <div className="add-post-category">
               Category:
               {/* <input type="text" placeholder="category" id="input-category" /> */}
-              <select name="input-category" id="input-category">
+              <select 
+                name="input-category" 
+                id="input-category"
+                value={selectedCategory !== 'all' ? selectedCategory : ''}
+              >
                 {allCategories &&
-                  allCategories.map(category => (
+                  allCategories
+                    .filter((category) => category !== 'all')
+                    .map(category => (
                     <option value={category}>{category}</option>
                   ))}
               </select>
