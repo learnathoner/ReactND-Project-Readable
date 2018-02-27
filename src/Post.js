@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import { FaArrowCircleUp, FaArrowCircleDown} from 'react-icons/lib/fa'
 
 const Post = ({ post, editPost }) => (
 
   <div className="post-container">
     <div className="post-rank">
-      <span>Rank</span>  
+      <div className="post-rank-up"><FaArrowCircleUp /></div>
+      <div className="post-rank-down"><FaArrowCircleDown /></div>
     </div>
     <div className="post-vote">
       <span>Vote:</span> {post.voteScore}
