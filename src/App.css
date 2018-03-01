@@ -219,3 +219,8 @@ span {
 .comment-content-container * {
   padding: 2px;
 }
+
+.post-rank-down:hover *, .post-rank-up:hover * {
+  fill: red;
+  filter: drop-shadow( 0 5px 5px rgb(223, 224, 143));
+}

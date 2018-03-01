@@ -7,15 +7,27 @@ const Post = ({ post, editPost }) => (
 
   <div className="post-container">
     <div className="post-rank">
-      <div className="post-rank-up"><FaArrowCircleUp /></div>
-      <div className="post-rank-down"><FaArrowCircleDown /></div>
+      <div className="post-rank-up">
+        <FaArrowCircleUp style={{
+          width: "25px", 
+          height: "25px", 
+          fill: "blue"
+        }} />
+        </div>
+      <div className="post-rank-down">
+        <FaArrowCircleDown style={{
+          width: "25px",
+          height: "25px", 
+          fill: "blue"
+        }} />
+      </div>
     </div>
     <div className="post-vote">
       <span>Vote:</span> {post.voteScore}
     </div>
     <div className="post-content">
       <p className="post-title">
-        <Link 
+        <Link
           to={`/post/${post.id}`}
           style={{
             textDecoration: 'none'
