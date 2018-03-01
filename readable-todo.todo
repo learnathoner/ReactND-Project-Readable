@@ -2,15 +2,15 @@ Readable:
 
   Comments:
     ✔ Integrate Moments @done (2018-2-25 17:51:23)
-    ☐ Add Edit
-    ☐ Add Delete
+    ☐ Edit comment functionality
+    ☐ Delete comment 
       ☐ Delete API call
       ☐ Delete action
       ☐ Delete Reducer
       ☐ Delete button integration
 
   Posts:
-    ☐ Change to inline edit instead of pop-up 
+    ☐ Change to inline edit instead of pop-up
       ☐ Comment edit on category page links to post page
       ☐ Post page has state for editing posts
       Notes:
@@ -22,8 +22,8 @@ Readable:
       ☐ Disable Add post button from post-page
 
     PostPage:
-      ☐ Move sort-bar to apply to comments
-      ☐ Apply editpost to postPage
+      ☐ Move sort-bar to apply to comments 
+      ☐ Route editPost to postPage 
       ✔ Remove add button from posts page @done (2018-2-25 19:40:32)
   
   Structure:
@@ -31,6 +31,11 @@ Readable:
 
   Ratings:
     ☐ Implement Rating buttons for posts and comments
+      ✔ Import icons from react icons onto post @done (2018-3-1 14:11:59)
+      ☐ Create API for upvote and downvote @high
+        ☐ Figure out how POST api adds upVotes and downVotes
+      ✔ Create action @done (2018-3-1 15:06:58)
+      ☐ Reducer to update post
   
   Additional Features:
 
@@ -41,3 +46,6 @@ Readable:
     SweetAlert Pop-ups (if necessary):
       ☐ Delete
       ☐ Add post / add comment
+
+Random optimizations:
+  ☐ Add tab index to end of {}

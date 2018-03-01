@@ -5,7 +5,8 @@ import {
   getComments, 
   addComment,
   updatePost,
-  DELETE_POST_API
+  DELETE_POST_API,
+  RATE_POST_API
 } from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
@@ -171,6 +172,17 @@ export function updatePostHandler(post) {
     return updatePost(post)
       .then(() => {
         return dispatch(updatePostAction(post))
+      })
+  }
+}
+
+// UPDATE VOTE THUNK HANDLER
+// Sends call to API to update vote, then updates vote in store
+export function updateVote(id, voteType) {
+  return function(dispatch) {
+    return RATE_POST_API(id, voteType)
+      .then(() => {
+        return dispatch(dispatchVote(id, voteType))
       })
   }
 }

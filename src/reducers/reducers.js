@@ -11,7 +11,8 @@ import {
   SET_SORT,
   ADD_COMMENT,
   UPDATE_POST,
-  DELETE_POST
+  DELETE_POST,
+  DISPATCH_VOTE
 } from '../actions/actions'
 
 // SELECTED CATEGORY

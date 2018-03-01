@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { FaArrowCircleUp, FaArrowCircleDown} from 'react-icons/lib/fa'
-import { dispatchVote } from './actions/actions'
+import { updateVote } from './actions/actions'
 
 class Post extends Component{
   
