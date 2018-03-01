@@ -95,6 +95,18 @@ export function setSort(criteria, order) {
   }
 }
 
+// DISPATCH VOTE
+// SENDS UPDATE VOTE ACTION
+export const DISPATCH_VOTE = "DISPATCH_VOTE";
+
+export function dispatchVote(id, voteType) {
+  return {
+    type: DISPATCH_VOTE,
+    id,
+    voteType
+  }
+}
+
 // THUNK ACTION
 // Fetches posts from API, changes state while requesting, changes again when found
 // TODO: Add error handling
