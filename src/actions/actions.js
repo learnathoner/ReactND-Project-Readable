@@ -100,11 +100,14 @@ export function setSort(criteria, order) {
 // SENDS UPDATE VOTE ACTION
 export const DISPATCH_VOTE = "DISPATCH_VOTE";
 
-export function dispatchVote(id, voteType) {
+export function dispatchVote(post) {
+  const { id, category, voteScore } = post;
+
   return {
     type: DISPATCH_VOTE,
     id,
-    voteType
+    category,
+    voteScore,
   }
 }
 
@@ -178,11 +181,11 @@ export function updatePostHandler(post) {
 
 // UPDATE VOTE THUNK HANDLER
 // Sends call to API to update vote, then updates vote in store
-export function updateVote(id, voteType) {
+export function updateVote(post) {
   return function(dispatch) {
-    return RATE_POST_API(id, voteType)
-      .then(() => {
-        return dispatch(dispatchVote(id, voteType))
+    return RATE_POST_API(post)
+      .then((newPost) => {
+        return dispatch(dispatchVote(newPost))
       })
   }
 }

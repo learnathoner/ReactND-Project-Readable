@@ -30,6 +30,7 @@ export function selectedCategory(state = '', action) {
 // Manages individual post objects, called by async handler
 function posts( state = { isFetching: false, didInvalidate: false, items: [] }, action) {
   switch (action.type) {
+    case DISPATCH_VOTE:
     case INVALIDATE_CATEGORY:
       return {
         ...state,
@@ -68,6 +69,7 @@ export function postsByCategory(state={}, action) {
       // Fiters category items not to include the id sent
       storeCopy[category].items = storeCopy[category].items.filter(catPostId => catPostId !== id)
       return storeCopy;
+    case DISPATCH_VOTE:
     case INVALIDATE_CATEGORY:
     case REQUEST_POSTS:
     case RECEIVE_POSTS:
@@ -87,11 +89,21 @@ export function postsByID(state={}, action) {
   
   switch (action.type) {
     case DELETE_POST:
-      const postId = action.id
+      let postId = action.id
       // TODO: Less clunk way to remove property?
       let storeCopy = { ... state }
       delete storeCopy[postId]
       return storeCopy;
+    case DISPATCH_VOTE:
+      postId = action.id;
+      const { voteScore } = action;
+      return {
+        ...state,
+        [postId]: {
+          ...state[postId],
+          voteScore
+        }
+      }
     case UPDATE_POST:
       const { id, title, body } = action.post
       return {

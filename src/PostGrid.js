@@ -117,8 +117,6 @@ class PostGrid extends Component {
       fetchPostsIfNeeded(currentCategory);
     }
 
-    console.log(JSON.stringify(posts));
-
     return (<div className="posts-container">
         <ul className="posts">
           {/* id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted */}

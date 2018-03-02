@@ -16,7 +16,11 @@ class Post extends Component{
           <div className="post-rank-up">
             <FaArrowCircleUp
               className="upVote"
-              onClick={(e) => sendVote(post.id, e.target.getAttribute("class"))}
+              onClick={(e) => sendVote({
+                id: post.id,
+                category: post.category,
+                option: e.target.getAttribute("class")
+              })}
               style={{
                 width: "25px", 
                 height: "25px", 
@@ -27,7 +31,11 @@ class Post extends Component{
           <div className="post-rank-down">
             <FaArrowCircleDown 
               className="downVote"
-              onClick={(e) => sendVote(post.id, e.target.getAttribute("class"))}
+              onClick={(e) => sendVote({
+                id: post.id,
+                category: post.category,
+                option: e.target.getAttribute("class")
+              })}              
               style={{
                 width: "25px",
                 height: "25px", 

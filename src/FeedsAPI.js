@@ -112,16 +112,19 @@ export const DELETE_POST_API = (id) => {
 
 // Rank Post
 // Should upVote or downVote post
-export const RATE_POST_API = (id, voteType) => {
+export const RATE_POST_API = (post) => {
+  const { id, option } = post;
+
   return fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ option: voteType })
+    body: JSON.stringify({ option })
   }).then(res => res.json())
     .catch(err => console.log('Error: ' + err))
+    .then(post => post)
 }
 
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"
