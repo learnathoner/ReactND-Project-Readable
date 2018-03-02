@@ -13,7 +13,6 @@ class App extends Component {
       <div className="App">
       
         <Header />
-        <SortBar />
 
         <Switch>
           <Route exact path="/" component={PostGrid} />

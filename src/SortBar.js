@@ -4,19 +4,28 @@ import { connect } from 'react-redux'
 import { setSort } from './actions/actions'
 
 class SortBar extends Component {
+  //PropTypes = sortType
 
-  testRegExp = (sortClass) => {
+  handleSort = (sortClass) => {
+    const { sortType, setSort } = this.props;
+
     const sortTest = /^sort-([^-]\w+)-(\w+)/
     const testResult = sortTest.exec(sortClass);
     const criteria = testResult[1];
     const order = testResult[2];
 
-    this.props.setSort(criteria, order)
+    const sortObj = {
+      sortType,
+      criteria,
+      order
+    }
+
+    this.props.setSort(sortObj)
 
   }
 
   render() {
-
+ 
     return (
       <div className="sort-bar">
         <div className="sort-text">
@@ -24,19 +33,19 @@ class SortBar extends Component {
         </div>
         <div className="sort-date">
           Date 
-            <div onClick={() => this.testRegExp('sort-timestamp-ascending')}>
+            <div onClick={() => this.handleSort('sort-timestamp-ascending')}>
               Oldest 
             </div>
-            <div onClick={() => this.testRegExp('sort-timestamp-descending')}>
+            <div onClick={() => this.handleSort('sort-timestamp-descending')}>
               Newest  
             </div>
         </div>
         <div className="rating">
           Rating
-          <div onClick={() => this.testRegExp('sort-voteScore-descending')}>
+          <div onClick={() => this.handleSort('sort-voteScore-descending')}>
             Highest 
           </div>
-          <div onClick={() => this.testRegExp('sort-voteScore-ascending')}>
+          <div onClick={() => this.handleSort('sort-voteScore-ascending')}>
             Lowest  
           </div>
         </div>
@@ -56,7 +65,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setSort: (criteria, order) => dispatch(setSort(criteria, order))
+    setSort: (sortObj) => dispatch(setSort(sortObj))
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Post from './Post'
 import AddPost from './AddPost'
+import SortBar from './SortBar'
 import { connect } from 'react-redux'
 import { 
   selectCategory, 
@@ -117,7 +118,9 @@ class PostGrid extends Component {
       fetchPostsIfNeeded(currentCategory);
     }
 
-    return (<div className="posts-container">
+    return (
+      <div className="posts-container">
+        <SortBar sortType="posts" />
         <ul className="posts">
           {/* id, timestamp, title, voteScore, author, body, category, commentCOunt, deleted */}
           {posts &&
@@ -180,7 +183,7 @@ const mapStateToProps = (state, ownProps) => {
   let posts = postIDs && postIDs.map((id) => state.postsByID[id]);
 
   // If sorter active, sort posts based on criteria and order
-  if (state.sorter.criteria) {
+  if (state.sorter.sortType === 'posts') {
     // TODO: Separate into sorting function
     const { criteria, order } = state.sorter;
 

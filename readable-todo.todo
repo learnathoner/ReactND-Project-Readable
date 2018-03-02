@@ -38,12 +38,20 @@ Readable:
     ☐ Separate EditPost Modal from PostGrid
 
   Ratings:
-    ☐ Implement Rating buttons for posts and comments
+    ✔ Implement Rating buttons for posts @done (2018-3-2 16:35:02)
       ✔ Import icons from react icons onto post @done (2018-3-1 14:11:59)
       ✔ Create API for upvote and downvote @high @done (2018-3-1 17:59:12)
         ✔ Figure out how POST api adds upVotes and downVotes @done (2018-3-1 17:59:13)
       ✔ Create action @done (2018-3-1 15:06:58)
-      ☐ Reducer to update post
+      ✔ Reducer to update post @done (2018-3-2 14:46:46)
+    ✔ Rating for comments @done (2018-3-2 16:35:05)
+      ✔ API call for comment @done (2018-3-2 16:35:06)
+      ✔ Action for comment @done (2018-3-2 16:35:06)
+      ✔ Reducer for comment @done (2018-3-2 16:35:07)
+      ✔ Change VoteArrow to accept post or comment @done (2018-3-2 16:35:10)
+    CSS:
+      ☐ Change voteArrow styling to be done in CSS, not component
+    
   
   Additional Features:
 

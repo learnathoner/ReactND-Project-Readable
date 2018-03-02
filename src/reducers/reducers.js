@@ -187,13 +187,14 @@ export function commentsByPost(state={}, action) {
 // SORTER
 // Tells app what criteria and order to sort posts / comments by
 export function sorter(state={}, action) {
-  const { criteria, order } = action;
+  const { sortType, criteria, order } = action;
 
   switch (action.type) {
     case SET_SORT:
       return {
-        criteria: criteria,
-        order: order    
+        sortType,
+        criteria,
+        order    
       }
     default:
       return state;

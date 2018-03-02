@@ -89,9 +89,12 @@ export function receiveComments(id, comments) {
 
 export const SET_SORT = "SET_SORT";
 
-export function setSort(criteria, order) {
+export function setSort(sortObj) {
+  const { sortType, criteria, order } = sortObj;
+
   return {
     type: SET_SORT,
+    sortType,
     criteria,
     order
   }
