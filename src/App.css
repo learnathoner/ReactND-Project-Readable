@@ -1,3 +1,12 @@
+*:focus {
+  outline: 0;
+  outline: none;
+}
+
+* * {
+  user-select: none;
+}
+
 .App {
   text-align: center;
 }
@@ -220,7 +229,9 @@ span {
   padding: 2px;
 }
 
-.post-rank-down:hover *, .post-rank-up:hover * {
+.upVote:hover *, .downVote:hover * {
   fill: red;
   filter: drop-shadow( 0 5px 5px rgb(223, 224, 143));
 }
+
+

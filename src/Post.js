@@ -13,14 +13,16 @@ class Post extends Component{
     return (
       <div className="post-container">
         <div className="post-rank">
-          <div className="post-rank-up">
-            <FaArrowCircleUp
-              className="upVote"
-              onClick={(e) => sendVote({
+          <div className="upVote" 
+            onClick={(e) => {
+              sendVote({
                 id: post.id,
                 category: post.category,
-                option: e.target.getAttribute("class")
+                option: "upVote"
               })}
+          }>
+            <FaArrowCircleUp
+              className="up-arrow"
               style={{
                 width: "25px", 
                 height: "25px", 
@@ -28,14 +30,14 @@ class Post extends Component{
               }}
             />
             </div>
-          <div className="post-rank-down">
+          <div className="downVote"
+            onClick={(e) => sendVote({
+              id: post.id,
+              category: post.category,
+              option: "downVote"
+            })}>
             <FaArrowCircleDown 
-              className="downVote"
-              onClick={(e) => sendVote({
-                id: post.id,
-                category: post.category,
-                option: e.target.getAttribute("class")
-              })}              
+              className="down-arrow"
               style={{
                 width: "25px",
                 height: "25px", 
