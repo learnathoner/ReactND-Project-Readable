@@ -89,8 +89,6 @@ export const addComment = ({ id, parentId, timestamp, body, author, voteScore })
 export const updatePost = (post) => {
   const { id, title, body } = post
 
-  console.log(JSON.stringify({ title, body }));
-
   return fetch(`${api}/posts/${id}`, {
     method: 'PUT',
     headers: {
@@ -125,6 +123,22 @@ export const RATE_POST_API = (post) => {
   }).then(res => res.json())
     .catch(err => console.log('Error: ' + err))
     .then(post => post)
+}
+
+// Update Rating for comment
+export const RATE_COMMENT_API = (comment) => {
+  const { id, option } = comment;
+
+  return fetch(`${api}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option })
+  }).then(res => res.json())
+    .catch(err => console.log('Error: ' + err))
+    .then(comment => comment)
 }
 
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"

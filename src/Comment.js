@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import VoteArrows from './VoteArrows'
 import moment from 'moment'
 
 class Comment extends Component {
@@ -9,9 +10,7 @@ class Comment extends Component {
 
     return (
       <div className="comment-container">
-        <div className="comment-rate-buttons-container">
-          Rate
-        </div>
+        <VoteArrows />
         <div className="comment-content-container">
           <div className="comment-header">
             <span className="comment-author">{comment.author} </span>

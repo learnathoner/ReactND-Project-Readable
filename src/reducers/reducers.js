@@ -12,7 +12,8 @@ import {
   ADD_COMMENT,
   UPDATE_POST,
   DELETE_POST,
-  DISPATCH_VOTE
+  DISPATCH_VOTE,
+  DISPATCH_COMMENT_VOTE
 } from '../actions/actions'
 
 // SELECTED CATEGORY
@@ -150,9 +151,22 @@ export function categories(state={}, action) {
 // COMMENTS BY POST
 // Receives all comments linked to a post ID
 export function commentsByPost(state={}, action) {
+  
+  if (action.comment) {
+    var { parentId, voteScore, id } = action.comment
+  }
+
   switch (action.type) {
+    case DISPATCH_COMMENT_VOTE:
+      return {
+        ...state,
+        [parentId]: state[parentId].map(comment => {
+            return comment.id === id
+              ? {...comment, voteScore}
+              : comment
+          })
+      }
     case ADD_COMMENT:
-      const { parentId } = action.comment
       return {
         ...state,
         [parentId]: [

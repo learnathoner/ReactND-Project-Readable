@@ -6,7 +6,8 @@ import {
   addComment,
   updatePost,
   DELETE_POST_API,
-  RATE_POST_API
+  RATE_POST_API,
+  RATE_COMMENT_API
 } from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
@@ -111,6 +112,20 @@ export function dispatchVote(post) {
   }
 }
 
+// Function for dispatching comment vote
+export const DISPATCH_COMMENT_VOTE = "DISPATCH_COMMENT_VOTE";
+export function dispatchCommentVote(comment) {
+  const { id, voteScore, parentId } = comment;
+  return {
+    type: DISPATCH_COMMENT_VOTE,
+    comment: {
+      id,
+      voteScore,
+      parentId
+    }
+  }
+}
+
 // THUNK ACTION
 // Fetches posts from API, changes state while requesting, changes again when found
 // TODO: Add error handling
@@ -186,6 +201,16 @@ export function updateVote(post) {
     return RATE_POST_API(post)
       .then((newPost) => {
         return dispatch(dispatchVote(newPost))
+      })
+  }
+}
+
+// UPDATE COMMENT VOTE HANDLER
+export function updateCommentVote(comment) {
+  return function(dispatch) {
+    return RATE_COMMENT_API(comment)
+      .then((newComment) => {
+        return dispatch(dispatchCommentVote(newComment))
       })
   }
 }
