@@ -11,7 +11,7 @@ class Post extends Component{
     return (
       <div className="post-container">
 
-        <VoteArrows post={post} />
+        <VoteArrows voteObj='post' elem={post} />
 
         <div className="post-vote">
           <span>Vote:</span> {post.voteScore}

@@ -10,7 +10,7 @@ class Comment extends Component {
 
     return (
       <div className="comment-container">
-        <VoteArrows />
+        <VoteArrows voteObj="comment" elem={comment} />
         <div className="comment-content-container">
           <div className="comment-header">
             <span className="comment-author">{comment.author} </span>
