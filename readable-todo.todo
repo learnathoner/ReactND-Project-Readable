@@ -1,5 +1,12 @@
 Readable:
 
+  Reducers:
+    ☐ Clean up PostsById Reducer
+      ☐ Takes action.id and action.posts.id
+
+  Sort Bar:
+    ☐ Make currently used sorting option not selectable
+
   Comments:
     ✔ Integrate Moments @done (2018-2-25 17:51:23)
     ☐ Edit comment functionality
@@ -15,6 +22,7 @@ Readable:
       ☐ Post page has state for editing posts
       Notes:
         * Would it work?
+    ☐ Change "posts" reducer to postsByCategory
     
     Add Posts:
       ✔ Make current category default selected @done (2018-2-25 19:54:00)
@@ -32,8 +40,8 @@ Readable:
   Ratings:
     ☐ Implement Rating buttons for posts and comments
       ✔ Import icons from react icons onto post @done (2018-3-1 14:11:59)
-      ☐ Create API for upvote and downvote @high
-        ☐ Figure out how POST api adds upVotes and downVotes
+      ✔ Create API for upvote and downvote @high @done (2018-3-1 17:59:12)
+        ✔ Figure out how POST api adds upVotes and downVotes @done (2018-3-1 17:59:13)
       ✔ Create action @done (2018-3-1 15:06:58)
       ☐ Reducer to update post
   
