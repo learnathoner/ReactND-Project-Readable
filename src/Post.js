@@ -1,51 +1,18 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { FaArrowCircleUp, FaArrowCircleDown} from 'react-icons/lib/fa'
-import { updateVote } from './actions/actions'
+import VoteArrows from './VoteArrows'
 
 class Post extends Component{
   
   render () {
-    const { post, editPost, sendVote } = this.props;
+    const { post, editPost } = this.props;
 
     return (
       <div className="post-container">
-        <div className="post-rank">
-          <div className="upVote" 
-            onClick={(e) => {
-              sendVote({
-                id: post.id,
-                category: post.category,
-                option: "upVote"
-              })}
-          }>
-            <FaArrowCircleUp
-              className="up-arrow"
-              style={{
-                width: "25px", 
-                height: "25px", 
-                fill: "blue"
-              }}
-            />
-            </div>
-          <div className="downVote"
-            onClick={(e) => sendVote({
-              id: post.id,
-              category: post.category,
-              option: "downVote"
-            })}>
-            <FaArrowCircleDown 
-              className="down-arrow"
-              style={{
-                width: "25px",
-                height: "25px", 
-                fill: "blue"
-              }} 
-            />
-          </div>
-        </div>
+
+        <VoteArrows post={post} />
+
         <div className="post-vote">
           <span>Vote:</span> {post.voteScore}
         </div>
@@ -100,17 +67,5 @@ class Post extends Component{
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    posts: state.postsByID
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sendVote: (id, vote) => dispatch(updateVote(id, vote))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default Post;
 
