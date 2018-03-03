@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
+import { updateComment } from './actions/actions'
+import { connect } from 'react-redux'
 
 class EditComment extends Component {
   state = {
@@ -7,7 +9,8 @@ class EditComment extends Component {
     editedComment: {
       parentId: '',
       id: '',
-      body: ''
+      body: '',
+      timestamp: ''
     } 
   }
 
@@ -40,10 +43,12 @@ class EditComment extends Component {
   // SUBMIT EDIT
   // Sends post to be updated in API, then updates post in postsById, closes Modal
   submitEdit = () => {
-    const { editedComment } = this.state
-    const { updatePost } = this.props
+    let { editedComment } = this.state
+    const { updateComment } = this.props
 
-    updatePost(editedComment)
+    editedComment.timestamp = Date.now()
+
+    updateComment(editedComment)
     this.closeModal();
   }
 
@@ -53,11 +58,10 @@ class EditComment extends Component {
     this.setState({
       modalShowing: false,
       editedComment: {
+        parentId: '',
         id:  '',
-        author: '',
-        category: '',
         body: '',
-        title: ''
+        timestamp: ''
       }
     })
   }
@@ -122,4 +126,16 @@ class EditComment extends Component {
   }
 }
 
-export default EditComment
+const mapStateToProps = (state, ownProps) => {
+  return {
+    
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateComment: (comment) => dispatch(updateComment(comment))    
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditComment)

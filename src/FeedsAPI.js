@@ -155,7 +155,7 @@ export const ADD_COMMENT_API = (comment) => {
   })
   .then(res => res.json())
   .catch(err => console.log('error: ' + err))
-  .then(post => post)
+  .then(comment => comment)
 }
 
 // UPDATE COMMENT

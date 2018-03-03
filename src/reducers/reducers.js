@@ -13,7 +13,8 @@ import {
   UPDATE_POST,
   DELETE_POST,
   DISPATCH_VOTE,
-  DISPATCH_COMMENT_VOTE
+  DISPATCH_COMMENT_VOTE,
+  UPDATE_COMMENT
 } from '../actions/actions'
 
 // SELECTED CATEGORY
@@ -153,7 +154,7 @@ export function categories(state={}, action) {
 export function commentsByPost(state={}, action) {
   
   if (action.comment) {
-    var { parentId, voteScore, id } = action.comment
+    var { id, parentId, voteScore, body, timestamp } = action.comment
   }
 
   switch (action.type) {
@@ -173,6 +174,14 @@ export function commentsByPost(state={}, action) {
           ...state[parentId],
           action.comment
         ]
+      }
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        [parentId]: state[parentId].map(comment => {
+          // If comment id is being updated, returns new comment
+          return (comment.id === id) ? action.comment : comment;
+        })
       }
     case RECEIVE_COMMENTS:
       return {

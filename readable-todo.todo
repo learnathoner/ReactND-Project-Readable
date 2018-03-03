@@ -15,9 +15,10 @@ Readable:
     ✔ Integrate Moments @done (2018-2-25 17:51:23)
     ☐ Edit comment functionality
       ✔ Create Modal for EditComments @done (2018-3-2 19:20:47)
-      ☐ Make API call for comment edit
-      ☐ Make action for comment edit and thunk handler
-      ☐ Make reducer for comment edit
+      ✔ Make API call for comment edit @done (2018-3-2 21:27:01)
+      ✔ Make action for comment edit and thunk handler @done (2018-3-2 21:27:09)
+      ✔ Make reducer for comment edit @done (2018-3-2 21:27:11)
+      ☐ Create separate "edited" time for comment instead of updating submitted
     ☐ Delete comment 
       ☐ Delete API call
       ☐ Delete action
@@ -38,6 +39,7 @@ Readable:
     EditPost:
       ☐ Add to postPage @high
       ☐ Separate EditPost into its own component
+      ☐ Add timestamp to updatePost and show when edited
   
   Ratings:
     ✔ Implement Rating buttons for posts @done (2018-3-2 16:35:02)

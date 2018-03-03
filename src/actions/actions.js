@@ -230,6 +230,15 @@ export function updateCommentVote(comment) {
   }
 }
 
+// UPDATE COMMENT
+// Calls update comment API then update comment for action
+export function updateComment(comment) {
+  return function(dispatch) {
+    return UPDATE_COMMENT_API(comment)
+      .then(newComment => dispatch(dispatchUpdateComment(newComment)))
+    }
+}
+
 // Fetch Categories
 
 export function fetchCategories() {
