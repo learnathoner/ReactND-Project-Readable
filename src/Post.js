@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import VoteArrows from './VoteArrows'
+// No such direcotry "editpost", need to use js extension?
+import EditPost from './EditPost.js'
 
 class Post extends Component{
   
@@ -58,7 +60,7 @@ class Post extends Component{
               {moment.utc(post.timestamp).format('l')}
             </p>
             <p>
-              <a href="#" onClick={() => editPost(post.id)}>Edit</a>
+              <EditPost post={post} />
             </p>
           </div>
         </div>
