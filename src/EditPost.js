@@ -1,31 +1,30 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { 
-  selectCategory, 
-  fetchPostsIfNeeded, 
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  selectCategory,
+  fetchPostsIfNeeded,
   updatePostHandler,
   deletePostThunk,
   invalidateCategory
-} from './actions/actions'
-import Modal from 'react-modal'
+} from "./actions/actions";
+import Modal from "react-modal";
 
 class EditPost extends Component {
-
   state = {
     modalShowing: false,
     editedPost: {
-      id:  '',
-      author: '',
-      category: '',
-      body: '',
-      title: ''
-    } 
-  }
+      id: "",
+      author: "",
+      category: "",
+      body: "",
+      title: ""
+    }
+  };
 
   // EDIT POST
   // When edit clicked, opens Modal and sets editedPost to current post info
-  editPost = (editId) => {
-    const { id, author, category, body, title } = this.props.post
+  editPost = editId => {
+    const { id, author, category, body, title } = this.props.post;
 
     this.setState({
       modalShowing: true,
@@ -36,29 +35,29 @@ class EditPost extends Component {
         body,
         title
       }
-    })    
-  }
+    });
+  };
 
   // HANDLE CHANGE
   // When input in modal changed, changes corresponding field in state.editedPost
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       editedPost: {
         ...this.state.editedPost,
-        [e.target.id] : e.target.value
+        [e.target.id]: e.target.value
       }
-    })
-  }
+    });
+  };
 
   // SUBMIT EDIT
   // Sends post to be updated in API, then updates post in postsById, closes Modal
   submitEdit = () => {
-    const { editedPost } = this.state
-    const { updatePost } = this.props
+    const { editedPost } = this.state;
+    const { updatePost } = this.props;
 
-    updatePost(editedPost)
+    updatePost(editedPost);
     this.closeModal();
-  }
+  };
 
   // CLOSE MODAL
   // REsets the state.editedPost, closes Modal
@@ -66,39 +65,46 @@ class EditPost extends Component {
     this.setState({
       modalShowing: false,
       editedPost: {
-        id:  '',
-        author: '',
-        category: '',
-        body: '',
-        title: ''
+        id: "",
+        author: "",
+        category: "",
+        body: "",
+        title: ""
       }
-    })
-  }
+    });
+  };
 
   // DELETE POST
   // Handles post deletion
   deletePost = () => {
-    const { id } = this.state.editedPost
-    const { deletePostThunk, invalidateCategories, selectedCategory } = this.props
+    const { id } = this.state.editedPost;
+    const { deletePostThunk, invalidateCategories } = this.props;
+    const selectedCategory = this.props.post.category;
 
     // TODO: Create styled alert window
-    const deleteOption = window.confirm("Delete post\nAre you sure?")
+    const deleteOption = window.confirm("Delete post\nAre you sure?");
 
     // If select yes to prompt, deletes from postsByID and postsByCategory, refreshes cat
     if (deleteOption) {
-      deletePostThunk(id, selectedCategory);
-      invalidateCategories(selectedCategory)
+      deletePostThunk(id, selectedCategory).then(() => invalidateCategories(selectedCategory));
       this.closeModal();
     }
-  }
+  };
 
-  render () {
+  render() {
     const { modalShowing, editedPost } = this.state;
     const { post } = this.props;
 
     return (
       <div>
-        <a href="#" onClick={() => { this.editPost(post.id) }}>Edit</a>
+        <a
+          href="#"
+          onClick={() => {
+            this.editPost(post.id);
+          }}
+        >
+          Edit
+        </a>
         <Modal
           // DISPLAYED WHEN EDITING POST
           // className='modal'
@@ -113,19 +119,26 @@ class EditPost extends Component {
             <div className="edit-post-heading">
               <h2>Edit Post:</h2>
             </div>
-            <div className="add-post-user">
-              Author: {editedPost.author}
-            </div>
+            <div className="add-post-user">Author: {editedPost.author}</div>
             <div className="add-post-category">
               Category: {editedPost.category}
             </div>
             <div className="add-post-title">
               Title:
-              <input type="text" onChange={this.handleChange} value={editedPost.title} id="title" />
+              <input
+                type="text"
+                onChange={this.handleChange}
+                value={editedPost.title}
+                id="title"
+              />
             </div>
             <div className="add-post-body">
               Body:
-              <textarea value={editedPost.body} id="body" onChange={this.handleChange} />
+              <textarea
+                value={editedPost.body}
+                id="body"
+                onChange={this.handleChange}
+              />
             </div>
             <hr />
             <button onClick={this.submitEdit}>Submit</button>
@@ -134,27 +147,24 @@ class EditPost extends Component {
             <button onClick={this.deletePost}>DELETE</button>
           </div>
         </Modal>
-        
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
+  return {};
+};
 
+const mapDispatchToProps = dispatch => {
   return {
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updatePost: (post) => dispatch(updatePostHandler(post)),
+    updatePost: post => dispatch(updatePostHandler(post)),
     deletePostThunk: (id, category) => dispatch(deletePostThunk(id, category)),
     invalidateCategories: category => {
       dispatch(invalidateCategory(category));
       dispatch(invalidateCategory("all"));
     }
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditPost)
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost);
