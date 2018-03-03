@@ -90,7 +90,10 @@ const mapStateToProps = (state, ownProps) => {
 
   // If commentsByPost loaded in state, assigns a copy of them to "comments"
   if (state.commentsByPost[ownProps.match.params.id]) {
-    comments = state.commentsByPost[ownProps.match.params.id].slice();
+    comments = state.commentsByPost[ownProps.match.params.id].filter(comment => {
+      return !comment.deleted
+    })
+    ;
   }
 
   // If comments loaded and sorterType "comments", sorts comments using sorter

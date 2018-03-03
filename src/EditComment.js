@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
-import { updateComment } from './actions/actions'
+import { updateComment, deleteCommentThunk } from './actions/actions'
 import { connect } from 'react-redux'
 
 class EditComment extends Component {
@@ -68,17 +68,16 @@ class EditComment extends Component {
 
   // DELETE POST
   // Handles post deletion
-  deletePost = () => {
+  deleteComment = () => {
     const { id } = this.state.editedComment
-    const { deletePostThunk, invalidateCategories, selectedCategory } = this.props
+    const { deleteCommentThunk } = this.props
 
     // TODO: Create styled alert window
-    const deleteOption = window.confirm("Delete post\nAre you sure?")
+    const deleteOption = window.confirm("Delete comment\nAre you sure?")
 
     // If select yes to prompt, deletes from postsByID and postsByCategory, refreshes cat
     if (deleteOption) {
-      deletePostThunk(id, selectedCategory);
-      invalidateCategories(selectedCategory)
+      deleteCommentThunk(id)
       this.closeModal();
     }
   }
@@ -117,7 +116,7 @@ class EditComment extends Component {
               <button onClick={this.submitEdit}>Submit</button>
               <button onClick={this.closeModal}>Cancel</button>
             <div />
-            <button onClick={this.deletePost}>DELETE</button>
+            <button onClick={this.deleteComment}>DELETE</button>
           </div>
         </Modal>
       </div>
@@ -134,7 +133,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateComment: (comment) => dispatch(updateComment(comment))    
+    updateComment: (comment) => dispatch(updateComment(comment)),
+    deleteCommentThunk: (id) => dispatch(deleteCommentThunk(id))
   }
 }
 

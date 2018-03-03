@@ -9,7 +9,8 @@ import {
   RATE_POST_API,
   RATE_COMMENT_API,
   UPDATE_COMMENT_API,
-  ADD_COMMENT_API
+  ADD_COMMENT_API,
+  DELETE_COMMENT_API
 } from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
@@ -284,5 +285,24 @@ export function addNewComment(comment) {
     return ADD_COMMENT_API(comment).then(newComment => {
       return dispatch(addCommentAction(newComment))
     })
+  }
+}
+
+// Delete Comment 
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
+function dispatchDeleteComment(comment) {
+  return {
+    type: DELETE_COMMENT,
+    comment
+  }
+}
+
+// Delete comment thunk handler
+
+export function deleteCommentThunk(id) {
+  return (dispatch) => {
+    return DELETE_COMMENT_API(id)
+      .then(newComment => dispatch(dispatchDeleteComment(newComment)))
   }
 }

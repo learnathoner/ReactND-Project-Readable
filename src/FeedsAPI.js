@@ -175,6 +175,16 @@ export const UPDATE_COMMENT_API = (comment) => {
     .then(comment => comment)
 }
 
+// DELETE COMMENT
+// delete /comments/:id - sets deleted flag to true
+export const DELETE_COMMENT_API = (id) => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers
+  }).then(res => res.json())
+    .then(comment => comment)
+}
+
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"
 // Put /posts:id - Edit details of posts, takes title and body
 // Get posts/:id/comments - all comments for single post

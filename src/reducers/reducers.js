@@ -14,7 +14,8 @@ import {
   DELETE_POST,
   DISPATCH_VOTE,
   DISPATCH_COMMENT_VOTE,
-  UPDATE_COMMENT
+  UPDATE_COMMENT,
+  DELETE_COMMENT
 } from '../actions/actions'
 
 // SELECTED CATEGORY
@@ -175,6 +176,7 @@ export function commentsByPost(state={}, action) {
           action.comment
         ]
       }
+    case DELETE_COMMENT:
     case UPDATE_COMMENT:
       return {
         ...state,
