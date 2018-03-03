@@ -6,10 +6,18 @@ Readable:
 
   Sort Bar:
     ☐ Make currently used sorting option not selectable
+    ✔ Move sortBar from App to postGrid and postPage @done (2018-3-2 18:50:38)
+      ☐ Create pageContents component to store postGrid and sortBar
+    ✔ Add sorting for comments @done (2018-3-2 18:50:37)
+
 
   Comments:
     ✔ Integrate Moments @done (2018-2-25 17:51:23)
     ☐ Edit comment functionality
+      ✔ Create Modal for EditComments @done (2018-3-2 19:20:47)
+      ☐ Make API call for comment edit
+      ☐ Make action for comment edit and thunk handler
+      ☐ Make reducer for comment edit
     ☐ Delete comment 
       ☐ Delete API call
       ☐ Delete action
@@ -17,12 +25,6 @@ Readable:
       ☐ Delete button integration
 
   Posts:
-    ☐ Change to inline edit instead of pop-up
-      ☐ Comment edit on category page links to post page
-      ☐ Post page has state for editing posts
-      Notes:
-        * Would it work?
-    ☐ Change "posts" reducer to postsByCategory
     
     Add Posts:
       ✔ Make current category default selected @done (2018-2-25 19:54:00)
@@ -30,13 +32,13 @@ Readable:
       ☐ Disable Add post button from post-page
 
     PostPage:
-      ☐ Move sort-bar to apply to comments 
       ☐ Route editPost to postPage 
       ✔ Remove add button from posts page @done (2018-2-25 19:40:32)
-  
-  Structure:
-    ☐ Separate EditPost Modal from PostGrid
 
+    EditPost:
+      ☐ Add to postPage @high
+      ☐ Separate EditPost into its own component
+  
   Ratings:
     ✔ Implement Rating buttons for posts @done (2018-3-2 16:35:02)
       ✔ Import icons from react icons onto post @done (2018-3-1 14:11:59)

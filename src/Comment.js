@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import VoteArrows from './VoteArrows'
+import EditComment from './EditComment'
 import moment from 'moment'
 
 class Comment extends Component {
@@ -21,7 +22,7 @@ class Comment extends Component {
             {comment.body}
           </div>
           <div className="comment-footer">
-            Edit reply
+            <EditComment comment={comment} />
           </div>
         </div>
       </div>

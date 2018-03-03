@@ -141,6 +141,20 @@ export const RATE_COMMENT_API = (comment) => {
     .then(comment => comment)
 }
 
+// UPDATE COMMENT
+export const UPDATE_COMMENT_API = (comment) => {
+  const { id, timestamp, body } = comment;
+
+  return fetch(`${api}/comments/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id, timestamp, body })
+  }).then(res => res.json())
+}
+
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"
 // Put /posts:id - Edit details of posts, takes title and body
 // Get posts/:id/comments - all comments for single post
