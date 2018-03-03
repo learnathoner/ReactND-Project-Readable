@@ -7,7 +7,9 @@ import {
   updatePost,
   DELETE_POST_API,
   RATE_POST_API,
-  RATE_COMMENT_API
+  RATE_COMMENT_API,
+  UPDATE_COMMENT_API,
+  ADD_COMMENT_API
 } from "../FeedsAPI";
 
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
@@ -85,6 +87,16 @@ export function receiveComments(id, comments) {
     id,
     comments
   };
+}
+
+// Update Comment action dispatch
+export const UPDATE_COMMENT = "UPDATE_COMMENT"
+
+export function dispatchUpdateComment(comment) {
+  return {
+    type: UPDATE_COMMENT,
+    comment
+  }
 }
 
 export const SET_SORT = "SET_SORT";
@@ -254,4 +266,14 @@ export function addCommentAction(comment) {
     comment
   }
 
+}
+
+// Add comment thunk action
+
+export function addNewComment(comment) {
+  return (dispatch) => {
+    return ADD_COMMENT_API(comment).then(newComment => {
+      return dispatch(addCommentAction(newComment))
+    })
+  }
 }

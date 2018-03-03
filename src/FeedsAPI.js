@@ -141,6 +141,23 @@ export const RATE_COMMENT_API = (comment) => {
     .then(comment => comment)
 }
 
+// ADD COMMENT
+export const ADD_COMMENT_API = (comment) => {
+  const { id, parentId, timestamp, body, author } = comment;
+
+  return fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id, parentId, timestamp, body, author })
+  })
+  .then(res => res.json())
+  .catch(err => console.log('error: ' + err))
+  .then(post => post)
+}
+
 // UPDATE COMMENT
 export const UPDATE_COMMENT_API = (comment) => {
   const { id, timestamp, body } = comment;
@@ -151,8 +168,11 @@ export const UPDATE_COMMENT_API = (comment) => {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ id, timestamp, body })
-  }).then(res => res.json())
+    body: JSON.stringify({ timestamp, body })
+  })
+    .then(res => res.json())
+    .catch(err => console.log("Error! " + err))
+    .then(comment => comment)
 }
 
 // Post /posts/:id = votes on a post, takes either "upVote or downVote"

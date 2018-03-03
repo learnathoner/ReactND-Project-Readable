@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectCategory, fetchComments, addCommentAction } from './actions/actions'
+import { selectCategory, fetchComments, addNewComment } from './actions/actions'
 import Post from './Post'
 import SortBar from './SortBar'
 import Comment from './Comment'
@@ -20,7 +20,6 @@ class PostPage extends Component {
     const author = document.getElementById('comment-author').value
     const body = document.getElementById('comment-box').value
     const timestamp = Date.now()
-    const voteScore = 1;
     
     if (!author || !body) {
       alert('Must have username and comment text')
@@ -32,10 +31,8 @@ class PostPage extends Component {
         timestamp,
         body,
         author,
-        voteScore
       }
 
-      addComment(newComment);
       this.props.addNewComment(newComment);
 
       document.getElementById('comment-author').value = ''
@@ -118,7 +115,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearCategory: () => { dispatch(selectCategory('')) },
     getComments: (id) => { dispatch(fetchComments(id)) },
-    addNewComment: (comment) => { dispatch(addCommentAction(comment)) }
+    addNewComment: (comment) => { dispatch(addNewComment(comment)) }
   }
 }
 
