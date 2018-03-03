@@ -89,10 +89,15 @@ class PostPage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let comments = state.commentsByPost[ownProps.match.params.id];
+  let comments;
 
-  if (state.sorter.sortType === 'comments') {
-    // TODO: Separate into sorting function
+  // If commentsByPost loaded in state, assigns a copy of them to "comments"
+  if (state.commentsByPost[ownProps.match.params.id]) {
+    comments = state.commentsByPost[ownProps.match.params.id].slice();
+  }
+
+  // If comments loaded and sorterType "comments", sorts comments using sorter
+  if (comments && state.sorter.sortType === 'comments') {
     const { criteria, order } = state.sorter;
 
     comments = comments.sort((comment1, comment2) => {
