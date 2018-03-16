@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { FaArrowDown, FaArrowUp } from 'react-icons/lib/fa'
 import { connect } from 'react-redux'
 import { setSort } from './actions/actions'
 
@@ -7,7 +6,7 @@ class SortBar extends Component {
   //PropTypes = sortType
 
   handleSort = (sortClass) => {
-    const { sortType, setSort } = this.props;
+    const { sortType } = this.props;
 
     const sortTest = /^sort-([^-]\w+)-(\w+)/
     const testResult = sortTest.exec(sortClass);

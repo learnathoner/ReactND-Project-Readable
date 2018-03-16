@@ -8,7 +8,7 @@ import EditPost from './EditPost.js'
 class Post extends Component{
   
   render () {
-    const { post, editPost } = this.props;
+    const { post } = this.props;
 
     return (
       <div className="post-container">

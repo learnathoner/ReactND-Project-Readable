@@ -239,3 +239,13 @@ span {
   filter: drop-shadow( 0 5px 5px rgb(223, 224, 143));
 }
 
+/* EDIT span link */
+
+.edit-link {
+  color: blue;
+}
+
+.edit-link:hover {
+  cursor: pointer;
+}
+

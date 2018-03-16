@@ -23,8 +23,7 @@ class AddPost extends Component {
     const title = document.getElementById("input-title").value;
     const body = document.getElementById("input-body").value;
     const timestamp = Date.now();
-
-    const { categories, invalidateCategories } = this.props;
+    const { invalidateCategories } = this.props;
 
     addPost({
       id,
@@ -70,17 +69,17 @@ class AddPost extends Component {
             <div className="add-post-category">
               Category:
               {/* <input type="text" placeholder="category" id="input-category" /> */}
-              <select 
-                name="input-category" 
+              <select
+                name="input-category"
                 id="input-category"
-                value={selectedCategory !== 'all' ? selectedCategory : ''}
+                value={selectedCategory !== "all" ? selectedCategory : ""}
               >
                 {allCategories &&
                   allCategories
-                    .filter((category) => category !== 'all')
+                    .filter(category => category !== "all")
                     .map(category => (
-                    <option value={category}>{category}</option>
-                  ))}
+                      <option value={category}>{category}</option>
+                    ))}
               </select>
             </div>
             <div className="add-post-title">
@@ -101,7 +100,6 @@ class AddPost extends Component {
 
 const MapStateToProps = (state, ownProps) => {
   return {
-    categories: state.categories.byName,
     allCategories: state.categories.allCategories
   };
 };

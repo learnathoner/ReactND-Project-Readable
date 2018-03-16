@@ -1,9 +1,8 @@
-import { 
-  getPosts, 
-  getCats, 
+import {
+  getPosts,
+  getCats,
   getCatPosts,
-  getComments, 
-  addComment,
+  getComments,
   updatePost,
   DELETE_POST_API,
   RATE_POST_API,
@@ -46,7 +45,7 @@ export function updatePostAction(post) {
   return {
     type: UPDATE_POST,
     post
-  }
+  };
 }
 
 export const RECEIVE_POSTS = "RECIEVE_POSTS";
@@ -60,7 +59,7 @@ export function receivePosts(category, posts) {
   };
 }
 
-// DELETE POST 
+// DELETE POST
 export const DELETE_POST = "DELETE_POST";
 
 export function deletePostAction(id, category) {
@@ -68,7 +67,7 @@ export function deletePostAction(id, category) {
     type: DELETE_POST,
     id,
     category
-  }
+  };
 }
 
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
@@ -91,13 +90,13 @@ export function receiveComments(id, comments) {
 }
 
 // Update Comment action dispatch
-export const UPDATE_COMMENT = "UPDATE_COMMENT"
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
 
 export function dispatchUpdateComment(comment) {
   return {
     type: UPDATE_COMMENT,
     comment
-  }
+  };
 }
 
 export const SET_SORT = "SET_SORT";
@@ -110,7 +109,7 @@ export function setSort(sortObj) {
     sortType,
     criteria,
     order
-  }
+  };
 }
 
 // DISPATCH VOTE
@@ -124,8 +123,8 @@ export function dispatchVote(post) {
     type: DISPATCH_VOTE,
     id,
     category,
-    voteScore,
-  }
+    voteScore
+  };
 }
 
 // Function for dispatching comment vote
@@ -139,7 +138,7 @@ export function dispatchCommentVote(comment) {
       voteScore,
       parentId
     }
-  }
+  };
 }
 
 // THUNK ACTION
@@ -149,10 +148,11 @@ export function dispatchCommentVote(comment) {
 // DELETE POST THUNK HANDLER
 // Sends DELETE_POST_API, then dispatches (deletePostAction)
 export function deletePostThunk(id, category) {
-  return function (dispatch) {
-    return DELETE_POST_API(id)
-      .then(() => dispatch(deletePostAction(id, category)))
-  }
+  return function(dispatch) {
+    return DELETE_POST_API(id).then(() =>
+      dispatch(deletePostAction(id, category))
+    );
+  };
 }
 
 // FETCH POSTS
@@ -203,41 +203,39 @@ export function fetchPostsIfNeeded(category) {
 // Sends call to API to update post, then updates post info in store
 export function updatePostHandler(post) {
   return function(dispatch) {
-    return updatePost(post)
-      .then(() => {
-        return dispatch(updatePostAction(post))
-      })
-  }
+    return updatePost(post).then(() => {
+      return dispatch(updatePostAction(post));
+    });
+  };
 }
 
 // UPDATE VOTE THUNK HANDLER
 // Sends call to API to update vote, then updates vote in store
 export function updateVote(post) {
   return function(dispatch) {
-    return RATE_POST_API(post)
-      .then((newPost) => {
-        return dispatch(dispatchVote(newPost))
-      })
-  }
+    return RATE_POST_API(post).then(newPost => {
+      return dispatch(dispatchVote(newPost));
+    });
+  };
 }
 
 // UPDATE COMMENT VOTE HANDLER
 export function updateCommentVote(comment) {
   return function(dispatch) {
-    return RATE_COMMENT_API(comment)
-      .then((newComment) => {
-        return dispatch(dispatchCommentVote(newComment))
-      })
-  }
+    return RATE_COMMENT_API(comment).then(newComment => {
+      return dispatch(dispatchCommentVote(newComment));
+    });
+  };
 }
 
 // UPDATE COMMENT
 // Calls update comment API then update comment for action
 export function updateComment(comment) {
   return function(dispatch) {
-    return UPDATE_COMMENT_API(comment)
-      .then(newComment => dispatch(dispatchUpdateComment(newComment)))
-    }
+    return UPDATE_COMMENT_API(comment).then(newComment =>
+      dispatch(dispatchUpdateComment(newComment))
+    );
+  };
 }
 
 // Fetch Categories
@@ -268,41 +266,41 @@ export function fetchComments(id) {
 
 // Add comment
 
-export const ADD_COMMENT = 'ADD_COMMENT'
+export const ADD_COMMENT = "ADD_COMMENT";
 
 export function addCommentAction(comment) {
   return {
     type: ADD_COMMENT,
     comment
-  }
-
+  };
 }
 
 // Add comment thunk action
 
 export function addNewComment(comment) {
-  return (dispatch) => {
+  return dispatch => {
     return ADD_COMMENT_API(comment).then(newComment => {
-      return dispatch(addCommentAction(newComment))
-    })
-  }
+      return dispatch(addCommentAction(newComment));
+    });
+  };
 }
 
-// Delete Comment 
+// Delete Comment
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
 function dispatchDeleteComment(comment) {
   return {
     type: DELETE_COMMENT,
     comment
-  }
+  };
 }
 
 // Delete comment thunk handler
 
 export function deleteCommentThunk(id) {
-  return (dispatch) => {
-    return DELETE_COMMENT_API(id)
-      .then(newComment => dispatch(dispatchDeleteComment(newComment)))
-  }
+  return dispatch => {
+    return DELETE_COMMENT_API(id).then(newComment =>
+      dispatch(dispatchDeleteComment(newComment))
+    );
+  };
 }

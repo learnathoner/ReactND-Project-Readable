@@ -1,10 +1,8 @@
-import { combineReducers } from 'redux'
-import { 
-  SELECT_CATEGORY, 
-  REQUEST_POSTS, 
+import { combineReducers } from "redux";
+import {
+  SELECT_CATEGORY,
+  REQUEST_POSTS,
   RECEIVE_POSTS,
-  INVALIDATE_SUBREDDIT,
-  FETCH_POSTS,
   INVALIDATE_CATEGORY,
   RECEIVE_CATEGORIES,
   RECEIVE_COMMENTS,
@@ -16,11 +14,11 @@ import {
   DISPATCH_COMMENT_VOTE,
   UPDATE_COMMENT,
   DELETE_COMMENT
-} from '../actions/actions'
+} from "../actions/actions";
 
 // SELECTED CATEGORY
 // Tracks Currently Selected Category for Category Bar and Post Grid
-export function selectedCategory(state = '', action) {
+export function selectedCategory(state = "", action) {
   switch (action.type) {
     case SELECT_CATEGORY:
       return action.category;
@@ -31,20 +29,23 @@ export function selectedCategory(state = '', action) {
 
 // POSTS
 // Manages individual post objects, called by async handler
-function posts( state = { isFetching: false, didInvalidate: false, items: [] }, action) {
+function posts(
+  state = { isFetching: false, didInvalidate: false, items: [] },
+  action
+) {
   switch (action.type) {
     case DISPATCH_VOTE:
     case INVALIDATE_CATEGORY:
       return {
         ...state,
         didInvalidate: true
-      }
+      };
     case REQUEST_POSTS:
       return {
         ...state,
         isFetching: true,
         didInvalidate: false
-      }
+      };
     case RECEIVE_POSTS:
       return {
         ...state,
@@ -53,24 +54,26 @@ function posts( state = { isFetching: false, didInvalidate: false, items: [] }, 
         // postsByCategory only stores postID
         items: action.posts.map(post => post.id),
         lastUpdated: action.receivedAt
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
 // POSTS BY CATEGORY
 // Stores { postsByCategory: [posts] } for easier sorting
 // Calls posts reducer
-export function postsByCategory(state={}, action) {
+export function postsByCategory(state = {}, action) {
   const { category, id } = action;
 
   switch (action.type) {
     // TODO: REMOVE DELETEPOST FROM CATEGORY
     case DELETE_POST:
-      let storeCopy = { ...state }
+      let storeCopy = { ...state };
       // Fiters category items not to include the id sent
-      storeCopy[category].items = storeCopy[category].items.filter(catPostId => catPostId !== id)
+      storeCopy[category].items = storeCopy[category].items.filter(
+        catPostId => catPostId !== id
+      );
       return storeCopy;
     case DISPATCH_VOTE:
     case INVALIDATE_CATEGORY:
@@ -79,23 +82,21 @@ export function postsByCategory(state={}, action) {
       return {
         ...state,
         [category]: posts(state[category], action)
-      }
+      };
     default:
       return state;
-
   }
 }
 
 // POSTS BY ID
 // When receiving posts from handler, stores each post by its ID
-export function postsByID(state={}, action) {
-  
+export function postsByID(state = {}, action) {
   switch (action.type) {
     case DELETE_POST:
-      let postId = action.id
+      let postId = action.id;
       // TODO: Less clunk way to remove property?
-      let storeCopy = { ... state }
-      delete storeCopy[postId]
+      let storeCopy = { ...state };
+      delete storeCopy[postId];
       return storeCopy;
     case DISPATCH_VOTE:
       postId = action.id;
@@ -106,35 +107,36 @@ export function postsByID(state={}, action) {
           ...state[postId],
           voteScore
         }
-      }
+      };
     case UPDATE_POST:
-      const { id, title, body } = action.post
+      const { id, title, body } = action.post;
       return {
-          ...state,
-          [id]: {
-            ...state[id],
-            title,
-            body
-          }
-      }
+        ...state,
+        [id]: {
+          ...state[id],
+          title,
+          body
+        }
+      };
     case RECEIVE_POSTS:
-      const newState = { ...state }
-      
+      const newState = { ...state };
+
       action.posts.forEach(post => {
-        if (!newState[post.id]) { newState[post.id] = post }
-      })
+        if (!newState[post.id]) {
+          newState[post.id] = post;
+        }
+      });
 
       return newState;
 
     default:
-      return state
+      return state;
   }
-
 }
 
 // CATEGORIES
 // Receives list of all categories, returns { byName: {}, allCategories: [] }
-export function categories(state={}, action) {
+export function categories(state = {}, action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
       return {
@@ -144,7 +146,7 @@ export function categories(state={}, action) {
           return categories;
         }, {}),
         allCategories: action.categories.map(category => category.name)
-      }
+      };
     default:
       return state;
   }
@@ -152,10 +154,9 @@ export function categories(state={}, action) {
 
 // COMMENTS BY POST
 // Receives all comments linked to a post ID
-export function commentsByPost(state={}, action) {
-  
+export function commentsByPost(state = {}, action) {
   if (action.comment) {
-    var { id, parentId, voteScore, body, timestamp } = action.comment
+    var { id, parentId, voteScore } = action.comment;
   }
 
   switch (action.type) {
@@ -163,33 +164,28 @@ export function commentsByPost(state={}, action) {
       return {
         ...state,
         [parentId]: state[parentId].map(comment => {
-            return comment.id === id
-              ? {...comment, voteScore}
-              : comment
-          })
-      }
+          return comment.id === id ? { ...comment, voteScore } : comment;
+        })
+      };
     case ADD_COMMENT:
       return {
         ...state,
-        [parentId]: [
-          ...state[parentId],
-          action.comment
-        ]
-      }
+        [parentId]: [...state[parentId], action.comment]
+      };
     case DELETE_COMMENT:
     case UPDATE_COMMENT:
       return {
         ...state,
         [parentId]: state[parentId].map(comment => {
           // If comment id is being updated, returns new comment
-          return (comment.id === id) ? action.comment : comment;
+          return comment.id === id ? action.comment : comment;
         })
-      }
+      };
     case RECEIVE_COMMENTS:
       return {
         ...state,
         [action.id]: action.comments
-      }
+      };
     default:
       return state;
   }
@@ -197,7 +193,7 @@ export function commentsByPost(state={}, action) {
 
 // SORTER
 // Tells app what criteria and order to sort posts / comments by
-export function sorter(state={}, action) {
+export function sorter(state = {}, action) {
   const { sortType, criteria, order } = action;
 
   switch (action.type) {
@@ -205,8 +201,8 @@ export function sorter(state={}, action) {
       return {
         sortType,
         criteria,
-        order    
-      }
+        order
+      };
     default:
       return state;
   }
@@ -219,6 +215,6 @@ const rootReducer = combineReducers({
   postsByID,
   commentsByPost,
   sorter
-})
+});
 
-export default rootReducer
+export default rootReducer;

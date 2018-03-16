@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  selectCategory,
-  fetchPostsIfNeeded,
   updatePostHandler,
   deletePostThunk,
   invalidateCategory
@@ -86,7 +84,9 @@ class EditPost extends Component {
 
     // If select yes to prompt, deletes from postsByID and postsByCategory, refreshes cat
     if (deleteOption) {
-      deletePostThunk(id, selectedCategory).then(() => invalidateCategories(selectedCategory));
+      deletePostThunk(id, selectedCategory).then(() =>
+        invalidateCategories(selectedCategory)
+      );
       this.closeModal();
     }
   };
@@ -97,14 +97,14 @@ class EditPost extends Component {
 
     return (
       <div>
-        <a
-          href="#"
+        <span
+          class="edit-link"
           onClick={() => {
             this.editPost(post.id);
           }}
         >
           Edit
-        </a>
+        </span>
         <Modal
           // DISPLAYED WHEN EDITING POST
           // className='modal'

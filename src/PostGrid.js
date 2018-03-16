@@ -1,19 +1,18 @@
+// Core
 import React, { Component } from "react";
+import { connect } from "react-redux";
+// App
 import Post from "./Post";
 import AddPost from "./AddPost";
 import SortBar from "./SortBar";
-import { connect } from "react-redux";
 import { selectCategory, fetchPostsIfNeeded } from "./actions/actions";
-import Modal from "react-modal";
-import { postsByID } from "./reducers/reducers";
 
 class PostGrid extends Component {
   render() {
-    const { posts } = this.props;
     const currentCategory = this.props.match.params.category || "all";
     const {
+      posts,
       categories,
-      allCategories,
       selectedCategory,
       changeCategory,
       fetchPostsIfNeeded
