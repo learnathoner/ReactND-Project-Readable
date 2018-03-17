@@ -1,19 +1,17 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
-import VoteArrows from './VoteArrows'
-import EditPost from './EditPost.js'
-import DeletePost from './DeletePost.js'
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import VoteArrows from "./VoteArrows";
+import EditPost from "./EditPost.js";
+import DeletePost from "./DeletePost.js";
 
-class Post extends Component{
-  
-  render () {
+class Post extends Component {
+  render() {
     const { post } = this.props;
 
     return (
       <div className="post-container">
-
-        <VoteArrows voteObj='post' elem={post} />
+        <VoteArrows voteObj="post" elem={post} />
 
         <div className="post-vote">
           <span>Vote:</span> {post.voteScore}
@@ -21,9 +19,9 @@ class Post extends Component{
         <div className="post-content">
           <p className="post-title">
             <Link
-              to={`/post/${post.id}`}
+              to={`/${post.category}/${post.id}`}
               style={{
-                textDecoration: 'none'
+                textDecoration: "none"
               }}
             >
               {post.title}
@@ -35,29 +33,29 @@ class Post extends Component{
               <span>By:</span> {post.author}
             </p>
             <p className="post-category">
-              <span>Posted in:</span> 
-              <Link 
+              <span>Posted in:</span>
+              <Link
                 to={`/r/${post.category}`}
                 style={{
-                  textDecoration: 'none'
+                  textDecoration: "none"
                 }}
               >
                 {post.category}
               </Link>
             </p>
             <p className="post-comment-count">
-              <Link 
-                to={`/post/${post.id}`}
+              <Link
+                to={`/${post.category}/${post.id}`}
                 style={{
-                  textDecoration: 'none'
+                  textDecoration: "none"
                 }}
               >
                 <span>Comments:</span> {post.commentCount}
               </Link>
             </p>
             <p className="post-time-stamp">
-              <span>Posted On: </span> 
-              {moment.utc(post.timestamp).format('l')}
+              <span>Posted On: </span>
+              {moment.utc(post.timestamp).format("l")}
             </p>
             <p>
               <EditPost post={post} />
@@ -68,9 +66,8 @@ class Post extends Component{
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 export default Post;
-

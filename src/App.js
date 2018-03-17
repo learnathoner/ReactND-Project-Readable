@@ -14,7 +14,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={PostGrid} />
           <Route exact path="/r/:category" component={PostGrid} />
-          <Route path="/post/:id" component={PostPage} />
+          <Route path="/:category/:id" component={PostPage} />
         </Switch>
       </div>
     );
