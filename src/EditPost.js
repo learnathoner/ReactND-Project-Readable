@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  updatePostHandler,
-  deletePostThunk,
-  invalidateCategory
-} from "./actions/actions";
+import { updatePostHandler } from "./actions/actions";
 import Modal from "react-modal";
 
 class EditPost extends Component {
@@ -72,25 +68,6 @@ class EditPost extends Component {
     });
   };
 
-  // DELETE POST
-  // Handles post deletion
-  deletePost = () => {
-    const { id } = this.state.editedPost;
-    const { deletePostThunk, invalidateCategories } = this.props;
-    const selectedCategory = this.props.post.category;
-
-    // TODO: Create styled alert window
-    const deleteOption = window.confirm("Delete post\nAre you sure?");
-
-    // If select yes to prompt, deletes from postsByID and postsByCategory, refreshes cat
-    if (deleteOption) {
-      deletePostThunk(id, selectedCategory).then(() =>
-        invalidateCategories(selectedCategory)
-      );
-      this.closeModal();
-    }
-  };
-
   render() {
     const { modalShowing, editedPost } = this.state;
     const { post } = this.props;
@@ -144,7 +121,6 @@ class EditPost extends Component {
             <button onClick={this.submitEdit}>Submit</button>
             <button onClick={this.closeModal}>Cancel</button>
             <hr />
-            <button onClick={this.deletePost}>DELETE</button>
           </div>
         </Modal>
       </div>
@@ -158,12 +134,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updatePost: post => dispatch(updatePostHandler(post)),
-    deletePostThunk: (id, category) => dispatch(deletePostThunk(id, category)),
-    invalidateCategories: category => {
-      dispatch(invalidateCategory(category));
-      dispatch(invalidateCategory("all"));
-    }
+    updatePost: post => dispatch(updatePostHandler(post))
   };
 };
 

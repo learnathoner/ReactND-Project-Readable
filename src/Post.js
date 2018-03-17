@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import VoteArrows from './VoteArrows'
-// No such direcotry "editpost", need to use js extension?
 import EditPost from './EditPost.js'
+import DeletePost from './DeletePost.js'
 
 class Post extends Component{
   
@@ -61,6 +61,9 @@ class Post extends Component{
             </p>
             <p>
               <EditPost post={post} />
+            </p>
+            <p>
+              <DeletePost post={post} />
             </p>
           </div>
         </div>

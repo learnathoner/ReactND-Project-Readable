@@ -70,10 +70,12 @@ export function postsByCategory(state = {}, action) {
     // TODO: REMOVE DELETEPOST FROM CATEGORY
     case DELETE_POST:
       let storeCopy = { ...state };
-      // Fiters category items not to include the id sent
-      storeCopy[category].items = storeCopy[category].items.filter(
-        catPostId => catPostId !== id
-      );
+      // Fiters category items in store not to include the deleted id
+      // If on all page, no categories will be loaded in store, so checks first
+      if (storeCopy[category]) {
+        storeCopy[category].items = storeCopy[category].items.filter(
+          catPostId => catPostId !== id
+        )}; 
       return storeCopy;
     case DISPATCH_VOTE:
     case INVALIDATE_CATEGORY:
